@@ -10,12 +10,12 @@ import {
 import React, { useEffect, useState } from "react";
 
 export const Dictionary = function () {
-  const [task, setTask] = useState("");
-  const [tasks, setTasks] = useState([]);
-  const [updateTaskId, setupdateTaskId] = useState("");
+  const [word, setWord] = useState("");
+  const [words, setWords] = useState([]);
+  const [updateWordId, setupdateWordId] = useState("");
 
   useEffect(() => {
-    const db_ref = ref(database, "/tasks");
+    const db_ref = ref(database, "/words");
     onValue(db_ref, (snapshot) => {
       // console.log("snapshot", snapshot);
       console.log("value", snapshot.val());
@@ -24,74 +24,74 @@ export const Dictionary = function () {
         console.log(snapshot.val());
         const data = snapshot.val();
         console.log("value", snapshot.val()[key]);
-        const taskArray = [];
+        const wordArray = [];
         for (let id in data) {
-          taskArray.push({ id, ...data[id] });
+          wordArray.push({ id, ...data[id] });
         }
-        console.log("taskArray", taskArray);
-        setTasks(taskArray);
+        console.log("wordArray", wordArray);
+        setWords(wordArray);
       }
     });
   }, []);
 
-  function addTask(event) {
+  function addWord(event) {
     event.preventDefault();
-    const db_ref = ref(database, "/tasks");
+    const db_ref = ref(database, "/words");
     push(db_ref, {
-      title: task,
+      title: word,
     });
   }
 
   function handleDelete(id,e) {
-    const db_ref = ref(database, `/tasks/${id}`);
+    const db_ref = ref(database, `/words/${id}`);
     remove(db_ref);
  }
 
   function handleUpdate(id) {
-    setupdateTaskId(id);
+    setupdateWordId(id);
   }
 
   function handleChange(id, newTitle) {
-    const db_ref = ref(database, `/tasks/${id}`);
+    const db_ref = ref(database, `/words/${id}`);
     set(db_ref, {
       title: newTitle,
     });
-    setupdateTaskId("");
+    setupdateWordId("");
   }
   return (
     <div className="App">
       <Navbar />
-      <h1>Todo List</h1>
+      <h1>Bookmark</h1>
       <form>
         <input
           type="text"
           onChange={(event) => {
-            setTask(event.target.value);
+            setWord(event.target.value);
           }}
-          defaultValue={task}
+          defaultValue={word}
         />
-        <button onClick={addTask} type="submit">
-          Add Todo
+        <button onClick={addWord} type="submit">
+          Add Word
         </button>
         <ul>
-          {tasks.map((task) => {
+          {words.map((word) => {
             return (
-              <li key={task.id}>
-                {task.title}
-                {updateTaskId === task.id ? (
+              <li key={word.id}>
+                {word.title}
+                {updateWordId === word.id ? (
                   <div>
                     <input
                       type={"text"}
                       defaultValue={"..."}
                       onChange={function (event) {
-                        handleChange(task.id, event.target.value);
+                        handleChange(word.id, event.target.value);
                       }}
                     />
                     <button
                       type={"submit"}
                       onClick={function (e) {
                         e.preventDefault(); 
-                        setupdateTaskId("");
+                        setupdateWordId("");
                       }}
                     >
                       Cancel
@@ -103,7 +103,7 @@ export const Dictionary = function () {
                       type={"submit"}
                       onClick={function (e) {
                         e.preventDefault();
-                        handleUpdate(task.id);
+                        handleUpdate(word.id);
                       }}
                     >
                       Edit
@@ -111,7 +111,7 @@ export const Dictionary = function () {
 
                     <button
                       onClick={function (e) {
-                        handleDelete(task.id, e);
+                        handleDelete(word.id, e);
                       }}
                       type="submit"
                     >
