@@ -1,13 +1,11 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
+import ProtectedRoutes from "./components/ProtectedRoutes";
+import { Dashboard } from "./pages/Dashboard";
+import { Dictionary } from "./pages/Dictionary";
 import { Home } from "./pages/Home";
 import { Learn } from "./pages/Learn";
-import { Dictionary } from "./pages/Dictionary";
-import { Dashboard } from "./pages/Dashboard";
 import { Login } from "./pages/Login";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { useState } from "react";
-import ProtectedRoutes from "./components/ProtectedRoutes";
-import { Logout } from "./pages/Logout";
 import { db_create } from "./services/Database";
 import { songs } from "./services/songs/songs";
 
@@ -25,10 +23,7 @@ function App() {
             <Route path="/learn" element={<Learn />}></Route>
             <Route path="/dictionary" element={<Dictionary />}></Route>
             <Route path="/dashboard" element={<Dashboard />}></Route>
-            <Route path="/logout" element={<Logout/>}></Route>
-
           </Route>
-
           <Route
             path="/login"
             element={<Login />}
