@@ -1,29 +1,29 @@
 import { auth } from "../services/Firebase";
 import {
   createUserWithEmailAndPassword,
-  onAuthStateChanged,
+  // onAuthStateChanged,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 
-export function Login({ setLoggedIn }) {
+export function Login() {
   const [email, setEmail] = useState("test@gmail.com");
   const [password, setPassword] = useState("password");
   const [error, setError] = useState("");
   const navigate = useNavigate();
   
   
-  useEffect(() => {
-    onAuthStateChanged(auth, user => {
-      if (user) {
-        console.log("Saved User", user);
-        setLoggedIn(true); // 로그인 상태 설정  
-        navigate('/'); // 로그인 후 메인 페이지로 이동
-      }
-    });
-  }, [navigate, setLoggedIn])
+  // useEffect(() => {
+  //   onAuthStateChanged(auth, user => {
+  //     if (user) {
+  //       console.log("Saved User", user);
+  //       setLoggedIn(true); // 로그인 상태 설정  
+  //       navigate('/'); // 로그인 후 메인 페이지로 이동
+  //     }
+  //   });
+  // }, [navigate, setLoggedIn])
 
   
   
@@ -33,7 +33,8 @@ export function Login({ setLoggedIn }) {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        setLoggedIn(true);
+        // setLoggedIn(true);
+        localStorage.setItem("user", JSON.stringify(user));
         console.log("Signed in as user:", user);
         navigate("/");
       })
@@ -95,6 +96,7 @@ export function Login({ setLoggedIn }) {
         <button type="submit" onClick={handleSignUp}>Sign Up</button>
       </form>
       <p>{error}</p>
+
     </div>
   );
 }

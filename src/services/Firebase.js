@@ -3,13 +3,13 @@ import { getAuth } from "firebase/auth";
 import { getDatabase } from "firebase/database";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyC8IcExRwnNOGTe3NoGmb8hf5Dg_sqRTUs",
-  authDomain: "projectcubs-8105c.firebaseapp.com",
-  databaseURL: "https://projectcubs-8105c-default-rtdb.firebaseio.com",
-  projectId: "projectcubs-8105c",
-  storageBucket: "projectcubs-8105c.appspot.com",
-  messagingSenderId: "480758805013",
-  appId: "1:480758805013:web:4242325c1e525a8d37541c"
+  apiKey: process.env.REACT_APP_APIKEY,
+  authDomain: process.env.REACT_APP_AUTHDOMAIN,
+  databaseURL: process.env.REACT_APP_DATABASEURL,
+  projectId: process.env.REACT_APP_PROJECTID,
+  storageBucket: process.env.REACT_APP_STORAGEBUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGINGSENDERID,
+  appId: process.env.REACT_APP_APPID
 };
 
 // Initialize Firebase

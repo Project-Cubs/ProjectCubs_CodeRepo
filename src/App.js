@@ -8,25 +8,30 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useState } from "react";
 import ProtectedRoutes from "./components/ProtectedRoutes";
 import { Logout } from "./pages/Logout";
+import { db_create } from "./services/Database";
+import { songs } from "./services/songs/songs";
 
 function App() {
-  const [isloggedIn, setLoggedIn] = useState(false);
+  // const [isloggedIn, setLoggedIn] = useState(false);
+
+  db_create("songs", songs);
 
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route element={<ProtectedRoutes isloggedIn={isloggedIn} />}>
+          <Route element={<ProtectedRoutes />}>
             <Route path="/" element={<Home />}></Route>
             <Route path="/learn" element={<Learn />}></Route>
             <Route path="/dictionary" element={<Dictionary />}></Route>
             <Route path="/dashboard" element={<Dashboard />}></Route>
-            <Route path="/logout" element={<Logout setLoggedIn={setLoggedIn} />}></Route>
+            <Route path="/logout" element={<Logout/>}></Route>
+
           </Route>
 
           <Route
             path="/login"
-            element={<Login setLoggedIn={setLoggedIn} />}
+            element={<Login />}
           ></Route>
         </Routes>
       </BrowserRouter>

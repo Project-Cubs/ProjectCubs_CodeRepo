@@ -25,10 +25,10 @@ export const Navbar = function () {
           {" "}
           Learn{" "}
         </NavLink>
-        <NavLink to={"/logout"} className={"Links"}>
-          {" "}
-          Logout{" "}
-        </NavLink>
+        <button onClick={function(){
+          localStorage.removeItem("user");
+          window.location.reload();
+        }}>Logout</button>
       </nav>
     </div>
   );
