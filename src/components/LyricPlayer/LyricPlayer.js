@@ -1,4 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { parseStringPromise } from 'xml2js';
+import './LyricPlayer.css'
+
 export const LyricPlayer = ({ music_url, title, artist, album_url, lyrics }) => {
     const [currentLineIndex, setCurrentLineIndex] = useState(0);
     const contentRef = useRef(null);
@@ -21,8 +24,8 @@ export const LyricPlayer = ({ music_url, title, artist, album_url, lyrics }) => 
             align();
         }
         console.log(videoRef.current.currentTime + '/' + videoRef.current.duration);
-        if (videoRef.current.currentTime > videoRef.current.duration-0.2) {
-            alert("Your Score is: " + Math.floor(Math.random()*100))
+        if (videoRef.current.currentTime > videoRef.current.duration - 0.2) {
+            alert("Your Score is: " + Math.floor(Math.random() * 100))
         }
     };
     useEffect(() => {
@@ -31,6 +34,48 @@ export const LyricPlayer = ({ music_url, title, artist, album_url, lyrics }) => 
             window.removeEventListener('resize', align);
         };
     }, []);
+
+    async function getKoreanDefinition(word) {
+        const url = "https://krdict.korean.go.kr/api/search";
+        const key = "313D5A71F45A553EE6F384880AD5CB9C";
+        const q = word;
+        const translated = "y";
+        const trans_lang = "1";
+        const result = await fetch(`${url}?key=${key}&q=${q}&translated=${translated}&trans_lang=${trans_lang}`);
+        const text = await result.text();
+        const json = await parseStringPromise(text);
+        const definition = json.channel.item?.[0].sense?.[0].translation?.[0].trans_dfn;
+        definition ? alert(`Definition: ${definition}`) : alert("No definition found");
+    }
+
+
+    function extractKoreanWords(sentence) {
+        const koreanRegex = /[\uAC00-\uD7AF]+/g;
+        const matches = sentence.match(koreanRegex);
+        return matches;
+    }
+
+    function generateLyric(sentence) {
+        if (sentence === "") {
+            return '•'
+        } else {
+            const words = sentence.split(/\s+/);
+            console.log("words", words);
+            const koreanWords = extractKoreanWords(sentence);
+            console.log("korean words", koreanWords);
+            const lyrics = words.map(word => {
+                if (koreanWords?.includes(word)) {
+                    return (
+                        <a onClick={() => getKoreanDefinition(word)}> {` ${word} `} &nbsp;</a>
+                    )
+                } else {
+                    return ` ${word} `
+                }
+            });
+            return lyrics;
+        }
+    }
+
     return (
         <div className="pbody">
             <div className="content" ref={contentRef}>
@@ -42,7 +87,7 @@ export const LyricPlayer = ({ music_url, title, artist, album_url, lyrics }) => 
                                 className={currentLineIndex === index ? 'highlighted' : ''}
                                 note={item.note}
                             >
-                                {item.line === '' ? '•' : item.line}
+                                {generateLyric(item.line)}
                             </div>
                         )
                     })}

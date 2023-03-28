@@ -1,10 +1,11 @@
 import { NavLink } from "react-router-dom";
+import "./Navbar.css"
 
 export const Navbar = function () {
   return (
     <div>
       <nav>
-        <h1 className="MyKStar">My K Star</h1>
+        <h1>My K Star</h1>
         <NavLink to={"/"} className={"Links"}>
           {" "}
           Home{" "}
@@ -25,11 +26,12 @@ export const Navbar = function () {
           {" "}
           Learn{" "}
         </NavLink>
-        <button onClick={function(){
+        <button onClick={function () {
           localStorage.removeItem("user");
           window.location.reload();
         }}>Logout</button>
       </nav>
+      <hr />
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { LyricPlayer } from "../components/LyricsPlayer";
-import { Navbar } from "../components/Navbar";
+import { LyricPlayer } from "../components/LyricPlayer/LyricPlayer";
+import { Navbar } from "../components/Navbar/Navbar";
 import { db_get } from "../services/Database";
 
 export const Learn = () => {

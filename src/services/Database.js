@@ -1,7 +1,5 @@
 import { get, ref, set } from "firebase/database";
-import {database} from "./Firebase"
-// import { database } from "./Firebase";
-
+import { database } from "./Firebase";
 
 export const db_create = (path, input) => {
     const db_ref = ref(database, path);
