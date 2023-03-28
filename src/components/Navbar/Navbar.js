@@ -1,7 +1,8 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import "./Navbar.css"
 
 export const Navbar = function () {
+  const navigate = useNavigate()
   return (
     <div>
       <nav>
@@ -24,7 +25,7 @@ export const Navbar = function () {
         </NavLink>
         <button onClick={function () {
           localStorage.removeItem("user");
-          window.location.reload();
+          navigate("/login")
         }}>Logout</button>
       </nav>
       <hr className="navbar-divider" />
