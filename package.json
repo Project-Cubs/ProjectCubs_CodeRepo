@@ -10,6 +10,7 @@
     "dotenv": "^16.0.3",
     "eslint-config-react-app": "^7.0.1",
     "firebase": "^9.18.0",
+    "gh-pages": "^5.0.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.2",
     "react-dom": "^18.2.0",
@@ -23,7 +24,9 @@
     "start": "react-dotenv && react-scripts start",
     "build": "react-dotenv && react-scripts build",
     "test": "react-dotenv && react-scripts test",
-    "eject": "react-dotenv && react-scripts eject"
+    "eject": "react-dotenv && react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build" 
   },
   "eslintConfig": {
     "extends": [
@@ -42,5 +45,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "homepage": "https://project-cubs.github.io"
 }

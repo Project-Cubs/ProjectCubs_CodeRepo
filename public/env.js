@@ -32,7 +32,7 @@ window.env = {
   "npm_config_init_module": "/Users/brian7989/.npm-init.js",
   "USER_ZDOTDIR": "/Users/brian7989",
   "__CFBundleIdentifier": "com.microsoft.VSCode",
-  "npm_command": "start",
+  "npm_command": "run-script",
   "PWD": "/Users/brian7989/Downloads/LognCoding/Codes/ProjectCubs_CodeRepo",
   "npm_lifecycle_event": "start",
   "EDITOR": "code -w",
