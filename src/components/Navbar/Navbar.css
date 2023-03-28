@@ -1,0 +1,32 @@
+hr {
+    margin-top: 0;
+    height: 2em;
+    background-color: var(--color-link);
+}
+
+
+nav {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+}
+
+nav li {
+    margin-right: 30px;
+    display: flex;
+}
+
+nav ul {
+    display: flex;
+    margin: 0;
+}
+
+nav a {
+    text-decoration: none;
+    margin-right: 20px;
+}
+
+.active {
+    text-decoration: underline;
+}
