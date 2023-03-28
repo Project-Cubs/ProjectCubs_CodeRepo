@@ -7,10 +7,19 @@ export const Dictionary = function () {
   return (
     <div className="App">
       <Navbar />
-      <main>
-        <h1>Bookmark</h1>
+      <header>
+        <blockquote>
+          <h1>
+            My K Star Dictionary
+          </h1>
+          <footer>
+            <h2>
+              Find meanings and save for quick reference
+            </h2>
+          </footer>
+        </blockquote>
         <Bookmark />
-      </main>
+      </header>
     </div>
   );
 };

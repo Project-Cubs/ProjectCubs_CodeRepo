@@ -7,6 +7,7 @@ import {
 } from "firebase/database";
 import React, { useEffect, useState } from "react";
 import { database } from "../../services/Firebase";
+import "./Bookmark.css"
 
 export const Bookmark = () => {
     const [word, setWord] = useState("");
@@ -58,67 +59,69 @@ export const Bookmark = () => {
         setupdateWordId("");
     }
     return (
-        <form>
-            <input
-                type="text"
-                onChange={(event) => {
-                    setWord(event.target.value);
-                }}
-                defaultValue={word}
-            />
-            <button onClick={addWord} type="submit">
-                Add Word
-            </button>
-            <ul>
-                {words.map((word) => {
-                    return (
-                        <li key={word.id}>
-                            {word.title}
-                            {updateWordId === word.id ? (
-                                <div>
-                                    <input
-                                        type={"text"}
-                                        defaultValue={"..."}
-                                        onChange={function (event) {
-                                            handleChange(word.id, event.target.value);
-                                        }}
-                                    />
-                                    <button
-                                        type={"submit"}
-                                        onClick={function (e) {
-                                            e.preventDefault();
-                                            setupdateWordId("");
-                                        }}
-                                    >
-                                        Cancel
-                                    </button>
-                                </div>
-                            ) : (
-                                <div>
-                                    <button
-                                        type={"submit"}
-                                        onClick={function (e) {
-                                            e.preventDefault();
-                                            handleUpdate(word.id);
-                                        }}
-                                    >
-                                        Edit
-                                    </button>
+        <section>
+            <form className="bookmark-form">
+                <input
+                    type="text"
+                    onChange={(event) => {
+                        setWord(event.target.value);
+                    }}
+                    defaultValue={word}
+                />
+                <button onClick={addWord} type="submit">
+                    Bookmark
+                </button>
+                <ul>
+                    {words.map((word) => {
+                        return (
+                            <li key={word.id}>
+                                {word.title}
+                                {updateWordId === word.id ? (
+                                    <div>
+                                        <input
+                                            type={"text"}
+                                            defaultValue={"..."}
+                                            onChange={function (event) {
+                                                handleChange(word.id, event.target.value);
+                                            }}
+                                        />
+                                        <button
+                                            type={"submit"}
+                                            onClick={function (e) {
+                                                e.preventDefault();
+                                                setupdateWordId("");
+                                            }}
+                                        >
+                                            Cancel
+                                        </button>
+                                    </div>
+                                ) : (
+                                    <div>
+                                        <button
+                                            type={"submit"}
+                                            onClick={function (e) {
+                                                e.preventDefault();
+                                                handleUpdate(word.id);
+                                            }}
+                                        >
+                                            Edit
+                                        </button>
 
-                                    <button
-                                        onClick={function (e) {
-                                            handleDelete(word.id, e);
-                                        }}
-                                        type="submit"
-                                    >
-                                        Delete
-                                    </button>
-                                </div>
-                            )}
-                        </li>
-                    );
-                })}
-            </ul>
-        </form>
+                                        <button
+                                            onClick={function (e) {
+                                                handleDelete(word.id, e);
+                                            }}
+                                            type="submit"
+                                        >
+                                            Delete
+                                        </button>
+                                    </div>
+                                )}
+                            </li>
+                        );
+                    })}
+                </ul>
+            </form>
+        </section>
     )
 }

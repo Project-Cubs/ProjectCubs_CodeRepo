@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import "./Navbar.css"
 
 export const Navbar = function () {
@@ -10,10 +10,6 @@ export const Navbar = function () {
           {" "}
           Home{" "}
         </NavLink>
-        {/* <Link to={"/login"} className={"Links"}>
-          {" "}
-          Login{" "}
-        </Link> */}
         <NavLink to={"/dashboard"} className={"Links"}>
           {" "}
           Dashboard{" "}
@@ -31,7 +27,7 @@ export const Navbar = function () {
           window.location.reload();
         }}>Logout</button>
       </nav>
-      <hr />
+      <hr className="navbar-divider" />
     </div>
   );
 };

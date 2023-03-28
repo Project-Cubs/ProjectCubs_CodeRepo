@@ -1,22 +1,29 @@
 import { useEffect, useState } from "react";
-import { LyricPlayer } from "../components/LyricPlayer/LyricPlayer";
+import { SongCard } from "../components/Cards/Cards";
 import { Navbar } from "../components/Navbar/Navbar";
 import { db_get } from "../services/Database";
 
 export const Learn = () => {
 
-    const [song, setSong] = useState();
+    const [songs, setSongs] = useState([]);
 
     useEffect(() => {
         db_get("songs").then(songs => {
-            setSong(songs[0])
+            setSongs(songs)
         })
     }, [])
 
     return (
         <div>
             <Navbar></Navbar>
-            {song ? <LyricPlayer {...song} /> : <h1> Learn </h1>}
+            <main>
+                <h1> Learn </h1>
+                <section>
+                    {songs.map((song, i) => {
+                        return (<SongCard key={i} song={song} />)
+                    })}
+                </section>
+            </main>
         </div>
     )
 }

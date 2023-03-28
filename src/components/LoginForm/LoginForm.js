@@ -52,7 +52,6 @@ export function LoginForm() {
 
     return (
         <div>
-
             <form>
                 <label>
                     Email:
@@ -73,7 +72,6 @@ export function LoginForm() {
                 </label>
                 <br />
                 <button type="submit" onClick={handleLogin}>Login</button>
-                <br />
                 <button type="submit" onClick={handleSignUp}>Sign Up</button>
             </form>
             {error && <code>{error}</code>}

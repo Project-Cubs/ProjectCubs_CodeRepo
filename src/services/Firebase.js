@@ -3,8 +3,6 @@ import { getAuth } from "firebase/auth";
 import { getDatabase } from "firebase/database";
 import env from "react-dotenv";
 
-console.log(env);
-
 const firebaseConfig = { ...env };
 
 // Initialize Firebase

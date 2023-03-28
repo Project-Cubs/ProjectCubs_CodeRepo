@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
+import { LyricPlayer } from "./components/LyricPlayer/LyricPlayer";
 import ProtectedRoutes from "./components/ProtectedRoutes";
 import { songs } from "./data/songs";
 import { Dashboard } from "./pages/Dashboard";
@@ -21,6 +22,7 @@ function App() {
             <Route path="/learn" element={<Learn />}></Route>
             <Route path="/dictionary" element={<Dictionary />}></Route>
             <Route path="/dashboard" element={<Dashboard />}></Route>
+            <Route path="/lyric-player" element={<LyricPlayer />}></Route>
           </Route>
           <Route
             path="/login"

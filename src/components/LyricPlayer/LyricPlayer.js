@@ -1,8 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 import { parseStringPromise } from 'xml2js';
 import './LyricPlayer.css'
 
-export const LyricPlayer = ({ music_url, title, artist, album_url, lyrics }) => {
+export const LyricPlayer = () => {
+
+    const location = useLocation();
+    const song = location.state?.song;
+
+    const { music_url, title, artist, album_url, lyrics } = { ...song }
     const [currentLineIndex, setCurrentLineIndex] = useState(0);
     const contentRef = useRef(null);
     const videoRef = useRef(null);
