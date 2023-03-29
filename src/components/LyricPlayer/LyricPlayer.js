@@ -1,3 +1,4 @@
+import { Agent } from 'https';
 import React, { useState, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import { parseStringPromise } from 'xml2js';
@@ -48,6 +49,10 @@ export const LyricPlayer = () => {
         const q = word;
         const translated = "y";
         const trans_lang = "1";
+        const cors_url = "https://proxy.cors.sh/"
+        const agent = new Agent({
+            rejectUnauthorized: false,
+        });
         const response = await fetch(`/api/search?key=${key}&q=${q}&translated=${translated}&trans_lang=${trans_lang}`);
 
         const text = await response.text();
