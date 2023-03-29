@@ -1,6 +1,7 @@
 {
   "short_name": "React App",
   "name": "Create React App Sample",
+  "host_permissions": ["https://krdict.korean.go.kr/"],
   "icons": [
     {
       "src": "favicon.ico",
