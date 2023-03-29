@@ -1,4 +1,3 @@
-import env from "react-dotenv";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import { LyricPlayer } from "./components/LyricPlayer/LyricPlayer";
