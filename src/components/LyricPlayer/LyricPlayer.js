@@ -42,27 +42,17 @@ export const LyricPlayer = () => {
     }, []);
 
     async function getKoreanDefinition(word) {
-        const url = "https://krdict.korean.go.kr/api/search";
-        const key = "313D5A71F45A553EE6F384880AD5CB9C";
+        const url = process.env.REACT_APP_DICT_URL;
+        const key = process.env.REACT_APP_DICT_KEY;
+
         const q = word;
         const translated = "y";
         const trans_lang = "1";
-        const response = await fetch(`${url}?key=${key}&q=${q}&translated=${translated}&trans_lang=${trans_lang}`, {
-            mode: 'no-cors',
-            headers: {
-                'Access-Control-Allow-Origin': '*'
-            }
-        });
-        const headers = new Headers(response.headers);
-        headers.set("Access-Control-Allow-Origin", "*");
-        headers.set("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-        // headers.set('Access-Control-Allow-Origin', '*');
-        const text = await response.clone({ headers: headers }).text();
+        const response = await fetch(`/api/search?key=${key}&q=${q}&translated=${translated}&trans_lang=${trans_lang}`);
 
-        // const text = await response.text();
-        console.log(text);
+        const text = await response.text();
+
         const json = await parseStringPromise(text);
-        console.log(json);
         const definition = json.channel.item?.[0].sense?.[0].translation?.[0].trans_dfn;
         definition ? alert(`Definition: ${definition}`) : alert("No definition found");
     }
@@ -82,10 +72,10 @@ export const LyricPlayer = () => {
             // console.log("words", words);
             const koreanWords = extractKoreanWords(sentence);
             // console.log("korean words", koreanWords);
-            const lyrics = words.map(word => {
+            const lyrics = words.map((word, i) => {
                 if (koreanWords?.includes(word)) {
                     return (
-                        <a onClick={() => getKoreanDefinition(word)}> {` ${word} `} &nbsp;</a>
+                        <a key={i} onClick={() => getKoreanDefinition(word)}> {` ${word} `} &nbsp;</a>
                     )
                 } else {
                     return ` ${word} `

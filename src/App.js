@@ -1,3 +1,4 @@
+import env from "react-dotenv";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import { LyricPlayer } from "./components/LyricPlayer/LyricPlayer";
@@ -15,7 +16,7 @@ function App() {
 
   return (
     <div className="App">
-      <BrowserRouter basename={process.env.PUBLIC_URL}>
+      <BrowserRouter basename={`/${process.env.PUBLIC_URL}`}>
         <Routes>
           <Route element={<ProtectedRoutes />}>
             <Route path="/" element={<Home />}></Route>
