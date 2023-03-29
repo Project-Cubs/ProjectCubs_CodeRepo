@@ -1,7 +1,4 @@
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
-import { Link, useNavigate } from 'react-router-dom';
-import { LyricPlayer } from '../LyricPlayer/LyricPlayer';
+import { useNavigate } from 'react-router-dom';
 
 export function SongCard({ song }) {
     const { album_url, artist, title } = { ...song };
