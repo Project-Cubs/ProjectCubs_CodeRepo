@@ -121,3 +121,39 @@
         transform: translateY(0%);
     }
 }
+
+.score{
+    background-color: #787878;
+    width: 50vw;
+    height: 70vh;
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    text-align: center;
+    justify-content: center;
+    transform: translate(-50%, -50%);
+    opacity: 0.0;
+  }
+  
+  .scoreDisplay{
+    margin-top: 90px;
+    font-size: 50px;
+    font-weight: 700;
+    color: #fff;
+  }
+  
+  .scoreaBoardNavBtn{
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    margin-top: 45vh;
+    text-decoration: none;
+  }
+  .scoreaBoardNavBtn button{
+    margin: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    font-weight: 800;
+  }

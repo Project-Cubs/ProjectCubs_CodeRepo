@@ -30,9 +30,13 @@ export const LyricPlayer = () => {
             setCurrentLineIndex(past.length - 1);
             align();
         }
-        console.log(videoRef.current.currentTime + '/' + videoRef.current.duration);
-        if (videoRef.current.currentTime > videoRef.current.duration - 0.2) {
-            alert("Your Score is: " + Math.floor(Math.random() * 100))
+        // console.log(videoRef.current.currentTime + '/' + videoRef.current.duration);
+        if (videoRef.current.currentTime > videoRef.current.duration-0.2) {
+            let score = Math.floor(Math.random()*100);
+            const scoreBoard = document.getElementsByClassName("score");
+            const scoreBoardText = document.getElementsByClassName("scoreDisplay");
+            scoreBoard[0].style.opacity = 1;
+            scoreBoardText[0].innerHTML = "Score: " + score + "%";
         }
     };
     useEffect(() => {
@@ -123,6 +127,21 @@ export const LyricPlayer = () => {
                         </video>
                     </div>
                 </div>
+            </div>
+
+            <div className='score'>
+                    <h1 className='scoreDisplay'></h1> 
+                    <div className='scoreaBoardNavBtn'>
+                        <button onClick={function(){
+                            alert("Scoreboard")
+                        }}>Scoreboard</button>
+                        <button onClick={function(){
+                            alert("Practice Again")
+                        }}>Practice Again</button>
+                        <button onClick={function(){
+                            alert("Other songs")
+                        }}>Other songs</button>
+                    </div>
             </div>
         </div>
     );
