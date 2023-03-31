@@ -1,8 +1,7 @@
-import { Agent } from 'https';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { parseStringPromise } from 'xml2js';
-import './LyricPlayer.css'
+import './LyricPlayer.css';
 
 export const LyricPlayer = () => {
 
