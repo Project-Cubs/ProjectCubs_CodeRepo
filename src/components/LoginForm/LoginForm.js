@@ -1,5 +1,4 @@
 import {
-    createUserWithEmailAndPassword,
     signInWithEmailAndPassword
 } from "firebase/auth";
 import React, { useState } from "react";
@@ -30,24 +29,10 @@ export function LoginForm() {
             });
     };
 
+    const redirectToRegister = (e) => {
+        e.preventDefault();
 
-
-    async function handleSignUp(event) {
-        event.preventDefault();
-        console.log("handleSingUp")
-        try {
-            const response = await createUserWithEmailAndPassword(
-                auth,
-                email,
-                password
-            );
-            const user_email = response.user.email;
-            console.log(response);
-            console.log("signed up with email: " + user_email);
-        } catch (error) {
-            setError(error.message);
-            console.log(error)
-        }
+        navigate("/register");
     }
 
     return (
@@ -72,7 +57,7 @@ export function LoginForm() {
                 </label>
                 <br />
                 <button type="submit" onClick={handleLogin}>Login</button>
-                <button type="submit" onClick={handleSignUp}>Sign Up</button>
+                <button type="register" onClick={redirectToRegister}>Sign Up / Register</button>
             </form>
             {error && <code>{error}</code>}
         </div>

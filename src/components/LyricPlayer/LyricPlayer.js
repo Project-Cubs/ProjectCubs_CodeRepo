@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { parseStringPromise } from 'xml2js';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './LyricPlayer.css';
 
 export const LyricPlayer = () => {
@@ -30,8 +31,8 @@ export const LyricPlayer = () => {
             align();
         }
         // console.log(videoRef.current.currentTime + '/' + videoRef.current.duration);
-        if (videoRef.current.currentTime > videoRef.current.duration-0.2) {
-            let score = Math.floor(Math.random()*100);
+        if (videoRef.current.currentTime > videoRef.current.duration - 0.2) {
+            let score = Math.floor(Math.random() * 100);
             const scoreBoard = document.getElementsByClassName("score");
             const scoreBoardText = document.getElementsByClassName("scoreDisplay");
             scoreBoard[0].style.opacity = 1;
@@ -60,7 +61,21 @@ export const LyricPlayer = () => {
         const definition = json.channel.item?.[0].sense?.[0].translation?.[0].trans_dfn;
         definition ? alert(`Definition: ${definition}`) : alert("No definition found");
     }
+    /*
+    async function getOriginalForm(word) {
+        const url = process.env.REACT_APP_DICT_URL2;
+        const key = process.env.REACT_APP_DICT_KEY2;
 
+        const q = word;
+        const response = await fetch(`${url}?key=${key}&q=${q}`);
+        
+        const test = await response.text();
+
+        const json = await parseStringPromise(test);
+        
+        const basic = json.channel.item?.[0].sense?.[0].basicformat?.[0].basic_form;
+    }
+    */
 
     function extractKoreanWords(sentence) {
         const koreanRegex = /[\uAC00-\uD7AF]+/g;
@@ -91,6 +106,7 @@ export const LyricPlayer = () => {
 
     return (
         <div className="pbody">
+            <div><NavLink to="/learn" className="Links backButton"><FontAwesomeIcon icon="fa-solid fa-arrow-left" style={{ color: "#ffffff", }} className="icons" /></NavLink></div>
             <div className="content" ref={contentRef}>
                 <div className="lyrics">
                     {lyrics.map((item, index) => {
@@ -129,18 +145,18 @@ export const LyricPlayer = () => {
             </div>
 
             <div className='score'>
-                    <h1 className='scoreDisplay'></h1> 
-                    <div className='scoreaBoardNavBtn'>
-                        <button onClick={function(){
-                            alert("Scoreboard")
-                        }}>Scoreboard</button>
-                        <button onClick={function(){
-                            alert("Practice Again")
-                        }}>Practice Again</button>
-                        <button onClick={function(){
-                            alert("Other songs")
-                        }}>Other songs</button>
-                    </div>
+                <h1 className='scoreDisplay'></h1>
+                <div className='scoreaBoardNavBtn'>
+                    <button onClick={function () {
+                        alert("Scoreboard")
+                    }}>Scoreboard</button>
+                    <button onClick={function () {
+                        alert("Practice Again")
+                    }}>Practice Again</button>
+                    <button onClick={function () {
+                        alert("Other songs")
+                    }}>Other songs</button>
+                </div>
             </div>
         </div>
     );

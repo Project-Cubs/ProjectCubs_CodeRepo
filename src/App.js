@@ -8,7 +8,12 @@ import { Dictionary } from "./pages/Dictionary";
 import { Home } from "./pages/Home";
 import { Learn } from "./pages/Learn";
 import { Login } from "./pages/Login";
+import { Register } from "./pages/Register";
 import { db_create } from "./services/Database";
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fas } from '@fortawesome/free-solid-svg-icons'
+
+library.add(fas)
 
 function App() {
   db_create("songs", songs);
@@ -24,10 +29,8 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />}></Route>
             <Route path="/lyric-player" element={<LyricPlayer />}></Route>
           </Route>
-          <Route
-            path="/login"
-            element={<Login />}
-          ></Route>
+          <Route path="/register" element={<Register />}></Route>
+          <Route path="/login" element={<Login />}></Route>
         </Routes>
       </BrowserRouter>
     </div>

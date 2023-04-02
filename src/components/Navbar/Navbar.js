@@ -6,7 +6,9 @@ export const Navbar = function () {
   return (
     <div>
       <nav>
-        <h1>My K Star</h1>
+        <NavLink to={"/"} className={"Links"}>
+          <h1>My K Star</h1>
+        </NavLink>
         <NavLink to={"/"} className={"Links"}>
           {" "}
           Home{" "}

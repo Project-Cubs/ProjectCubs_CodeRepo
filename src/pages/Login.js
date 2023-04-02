@@ -6,7 +6,7 @@ export function Login() {
     <main>
       <h1>Welcome! </h1>
       <hr />
-      <LoginForm/>
+      <LoginForm />
     </main>
   );
 }

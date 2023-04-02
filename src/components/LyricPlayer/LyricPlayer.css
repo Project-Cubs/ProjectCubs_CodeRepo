@@ -157,3 +157,14 @@
     border: none;
     font-weight: 800;
   }
+  .backButton {
+    margin-top: 20px;
+    margin-left: 20px;
+    align-items: center;
+    background-color: #118bee;
+    padding: 10px 15px 5px 15px;
+    border-radius: 5px;
+  }
+  .icons {
+    font-size: 20px;
+  }
