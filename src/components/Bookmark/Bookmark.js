@@ -6,7 +6,7 @@ import {
     set,
 } from "firebase/database";
 import React, { useEffect, useState } from "react";
-import { database } from "../../services/Firebase";
+import { auth, database } from "../../services/Firebase";
 import "./Bookmark.css"
 
 export const Bookmark = () => {
@@ -15,7 +15,7 @@ export const Bookmark = () => {
     const [updateWordId, setupdateWordId] = useState("");
 
     useEffect(() => {
-        const db_ref = ref(database, "/words");
+        const db_ref = ref(database, `/users/${auth.currentUser.uid}/bookmarked_words`);
         onValue(db_ref, (snapshot) => {
             // console.log("snapshot", snapshot);
             console.log("value", snapshot.val());
@@ -36,14 +36,14 @@ export const Bookmark = () => {
 
     function addWord(event) {
         event.preventDefault();
-        const db_ref = ref(database, "/words");
+        const db_ref = ref(database, `/users/${auth.currentUser.uid}/bookmarked_words`);
         push(db_ref, {
             title: word,
         });
     }
 
     function handleDelete(id, e) {
-        const db_ref = ref(database, `/words/${id}`);
+        const db_ref = ref(database, `/users/${auth.currentUser.uid}/bookmarked_words/${id}`);
         remove(db_ref);
     }
 
@@ -52,7 +52,7 @@ export const Bookmark = () => {
     }
 
     function handleChange(id, newTitle) {
-        const db_ref = ref(database, `/words/${id}`);
+        const db_ref = ref(database, `/users/${auth.currentUser.uid}/bookmarked_words/${id}`);
         set(db_ref, {
             title: newTitle,
         });

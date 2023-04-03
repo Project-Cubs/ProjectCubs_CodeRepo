@@ -1,9 +1,13 @@
 import {
   createUserWithEmailAndPassword,
 } from "firebase/auth";
+import {
+  set,
+  ref,
+} from "firebase/database";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { auth } from "../../services/Firebase";
+import { auth, database } from "../../services/Firebase";
 
 export function RegisterForm() {
   const [firstName, setFirstName] = useState();
@@ -19,11 +23,13 @@ export function RegisterForm() {
     try {
       const response = await createUserWithEmailAndPassword(
         auth,
-        firstName,
-        lastName,
         email,
         password
       );
+      const db_ref_fN = ref(database, `/users/${auth.currentUser.uid}/first_name`);
+      const db_ref_lN = ref(database, `/users/${auth.currentUser.uid}/last_name`);
+      set(db_ref_fN, firstName);
+      set(db_ref_lN, lastName);
       const name = response.user.firstName + " " + response.user.lastName;
       const user_email = response.user.email;
       console.log(response);
