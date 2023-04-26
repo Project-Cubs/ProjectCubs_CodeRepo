@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { setSongScore } from '../../../Firebase/Score/score.firebase';
+import React from 'react';
 
 export const Player = ({
   music_url,

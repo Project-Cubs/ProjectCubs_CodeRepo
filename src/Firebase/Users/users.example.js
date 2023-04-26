@@ -1,14 +1,14 @@
 // USER SCHEMA
-const user = {
-    email: "test@gmail.com",
-    firstName: "Test",
-    lastName: "User",
-    highScore: {
-        song: 0,
-        quiz: 0
-    },
-    bookmark: []
-}
+// const user = {
+//     email: "test@gmail.com",
+//     firstName: "Test",
+//     lastName: "User",
+//     highScore: {
+//         song: 0,
+//         quiz: 0
+//     },
+//     bookmark: []
+// }
 
 export const createUser = ({
     email,

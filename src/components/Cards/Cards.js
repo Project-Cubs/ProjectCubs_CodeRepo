@@ -7,7 +7,7 @@ export function SongCard({ song }) {
         <aside>
             <h3> {title} </h3>
             <figure>
-                <img src={album_url} />
+                <img src={album_url} alt='album' />
                 <figcaption>
                     <i> Artist: {artist} </i>
                 </figcaption>
