@@ -1,11 +1,10 @@
-import { useEffect, useState } from "react";
-import { getHighestScore, rankUserScores } from "../Firebase/Score/score.firebase";
-import { Navbar } from "../components/Navbar/Navbar";
 import { onValue, ref } from "firebase/database";
+import { useEffect, useState } from "react";
 import { database } from "../Firebase/Firebase";
+import { Navbar } from "../components/Navbar/Navbar";
 
 
-export const Scoreboard = function () {
+export function Scoreboard() {
 
   const [scores, setScores] = useState([]);
 

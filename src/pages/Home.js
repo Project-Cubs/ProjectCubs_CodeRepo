@@ -1,15 +1,13 @@
-import { useOutletContext } from "react-router-dom";
-import Navbar from "../components/Navbar";
+import { Navbar } from "../components/Navbar/Navbar";
 
-export const Home = function () {
+
+export function Home() {
   return (
     <div>
       <Navbar />
       <main>
-        <WordQuiz />
+        <h1> Home </h1>
       </main>
     </div>
   );
 };
-
-export default Home;

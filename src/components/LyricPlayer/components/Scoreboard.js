@@ -1,16 +1,18 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export const Scoreboard = () => {
+export const Scoreboard = ({ score }) => {
   const navigate = useNavigate();
-  return (
+  return score && (
     <div className="score">
-      <h1 className="scoreDisplay"></h1>
-      <div className="scoreaBoardNavBtn">
-        <button onClick={() => navigate("/scoreboard")}>Scoreboard</button>
-        <button onClick={() => alert('Practice Again')}>Practice Again</button>
-        <button onClick={() => navigate("/learn")}>Other songs</button>
-      </div>
+      <>
+        <h1 className="scoreDisplay"> Your score: <br /> 🎤 {score} 🎤</h1>
+        <div className="scoreBoardNavBtn">
+          <button onClick={() => navigate("/scoreboard")}>Scoreboard</button>
+          <button onClick={() => alert('Practice Again')}>Practice Again</button>
+          <button onClick={() => navigate("/learn")}>Other songs</button>
+        </div>
+      </>
     </div>
-  );
+  )
 };
