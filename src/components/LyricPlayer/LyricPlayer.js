@@ -1,15 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
-import { parseStringPromise } from 'xml2js';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import './LyricPlayer.css';
-
-export const LyricPlayer = () => {
+import React, { useState, useEffect, useRef } from 'react';
+import { parseString } from 'xml2js';
 
     const location = useLocation();
     const song = location.state?.song;
 
-    const { music_url, title, artist, album_url, lyrics } = { ...song }
     const [currentLineIndex, setCurrentLineIndex] = useState(0);
     const contentRef = useRef(null);
     const videoRef = useRef(null);
@@ -23,20 +17,17 @@ export const LyricPlayer = () => {
             contentRef.current.scrollTop = scrollValue;
         }
     };
+
+
     const handleTimeUpdate = () => {
+=======
+    const handleTimeUpdate = async () => {
+>>>>>>> Stashed changes:src/components/LyricPlayer/LyricPlayer.js
         const time = videoRef.current.currentTime * 1000;
         const past = lyrics.filter((item) => item.time < time);
         if (past.length !== currentLineIndex) {
             setCurrentLineIndex(past.length - 1);
             align();
-        }
-        // console.log(videoRef.current.currentTime + '/' + videoRef.current.duration);
-        if (videoRef.current.currentTime > videoRef.current.duration - 0.2) {
-            let score = Math.floor(Math.random() * 100);
-            const scoreBoard = document.getElementsByClassName("score");
-            const scoreBoardText = document.getElementsByClassName("scoreDisplay");
-            scoreBoard[0].style.opacity = 1;
-            scoreBoardText[0].innerHTML = "Score: " + score + "%";
         }
     };
     useEffect(() => {
@@ -104,9 +95,15 @@ export const LyricPlayer = () => {
         }
     }
 
+    useEffect(() => {
+        window.addEventListener('resize', align);
+        return () => {
+            window.removeEventListener('resize', align);
+        };
+    }, []);
+
     return (
         <div className="pbody">
-            <div><NavLink to="/learn" className="Links backButton"><FontAwesomeIcon icon="fa-solid fa-arrow-left" style={{ color: "#ffffff", }} className="icons" /></NavLink></div>
             <div className="content" ref={contentRef}>
                 <div className="lyrics">
                     {lyrics.map((item, index) => {
@@ -141,21 +138,6 @@ export const LyricPlayer = () => {
                             <source src={music_url} type="audio/mpeg"></source>
                         </video>
                     </div>
-                </div>
-            </div>
-
-            <div className='score'>
-                <h1 className='scoreDisplay'></h1>
-                <div className='scoreaBoardNavBtn'>
-                    <button onClick={function () {
-                        alert("Scoreboard")
-                    }}>Scoreboard</button>
-                    <button onClick={function () {
-                        alert("Practice Again")
-                    }}>Practice Again</button>
-                    <button onClick={function () {
-                        alert("Other songs")
-                    }}>Other songs</button>
                 </div>
             </div>
         </div>

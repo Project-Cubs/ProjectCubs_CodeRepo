@@ -13,9 +13,9 @@ export const Navbar = function () {
           {" "}
           Home{" "}
         </NavLink>
-        <NavLink to={"/dashboard"} className={"Links"}>
+        <NavLink to={"/scoreboard"} className={"Links"}>
           {" "}
-          Dashboard{" "}
+          Scoreboard{" "}
         </NavLink>
         <NavLink to={"/dictionary"} className={"Links"}>
           {" "}

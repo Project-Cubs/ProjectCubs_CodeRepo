@@ -1,5 +1,5 @@
-import { Navbar } from "../components/Navbar/Navbar";
-import WordQuiz from "../components/WordQuiz";
+import { useOutletContext } from "react-router-dom";
+import Navbar from "../components/Navbar";
 
 export const Home = function () {
   return (
@@ -11,3 +11,5 @@ export const Home = function () {
     </div>
   );
 };
+
+export default Home;

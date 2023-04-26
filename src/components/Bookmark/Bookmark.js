@@ -6,8 +6,9 @@ import {
     set,
 } from "firebase/database";
 import React, { useEffect, useState } from "react";
-import { auth, database } from "../../services/Firebase";
+
 import "./Bookmark.css"
+import { auth, database } from "../../Firebase/Firebase";
 
 export const Bookmark = () => {
     const [word, setWord] = useState("");
@@ -18,7 +19,7 @@ export const Bookmark = () => {
         const db_ref = ref(database, `/users/${auth.currentUser.uid}/bookmarked_words`);
         onValue(db_ref, (snapshot) => {
             // console.log("snapshot", snapshot);
-            console.log("value", snapshot.val());
+            // console.log("value", snapshot.val());
             //print all values
             for (let key in snapshot.val()) {
                 console.log(snapshot.val());

@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react";
+import { LyricPlayer } from "../components/LyricPlayer";
+import Navbar from "../components/Navbar";
+import { db_get } from "../services/Database";
+=======
 import { SongCard } from "../components/Cards/Cards";
 import { Navbar } from "../components/Navbar/Navbar";
-import { db_get } from "../services/Database";
+import { downloadSongs } from "../Firebase/Songs/songs.firebase";
+>>>>>>> Stashed changes
 
 export const Learn = () => {
 
     const [songs, setSongs] = useState([]);
 
     useEffect(() => {
-        db_get("songs").then(songs => {
-            setSongs(songs)
-        })
+        downloadSongs().then(s => setSongs(s))
     }, [])
 
     return (

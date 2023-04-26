@@ -1,9 +1,6 @@
-import {
-    signInWithEmailAndPassword
-} from "firebase/auth";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { auth } from "../../services/Firebase";
+import { signInUser } from "../../Firebase/Users/users.firebase";
 
 export function LoginForm() {
     const [email, setEmail] = useState("test@gmail.com");
@@ -11,27 +8,25 @@ export function LoginForm() {
     const [error, setError] = useState("");
     const navigate = useNavigate();
 
-    const handleLogin = (e) => {  //can make it faster by using async await
+    const handleLogin = async (e) => {
         e.preventDefault();
-
-        signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                const user = userCredential.user;
-                localStorage.setItem("user", JSON.stringify(user));
-                console.log("Signed in as user:", user);
-                navigate("/");
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.error(`Error signing in: ${errorCode} - ${errorMessage}`);
-                setError(`Error signing in: ${errorCode} - ${errorMessage}`);
-            });
+        if (!email || !password) {
+            setError("Please enter email and password.");
+            return;
+        }
+        try {
+            await signInUser({ email, password })
+            navigate("/")
+        } catch (error) {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.error(`Error: ${errorCode} - ${errorMessage}`);
+            setError(`Error: ${errorCode} - ${errorMessage}`);
+        }
     };
 
     const redirectToRegister = (e) => {
         e.preventDefault();
-
         navigate("/register");
     }
 

@@ -1,87 +1,47 @@
-import {
-  createUserWithEmailAndPassword,
-} from "firebase/auth";
-import {
-  set,
-  ref,
-} from "firebase/database";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { auth, database } from "../../services/Firebase";
+import { registerUser } from "../../Firebase/Users/users.firebase";
 
 export function RegisterForm() {
-  const [firstName, setFirstName] = useState();
-  const [lastName, setLastName] = useState();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [values, setValues] = useState({ firstName: "", lastName: "", email: "", password: "" });
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  async function handleSignUp(event) {
+  const handleChange = (e) => setValues({ ...values, [e.target.name]: e.target.value });
+
+  const handleSignUp = async (event) => {
     event.preventDefault();
-    console.log("handleSignUp");
     try {
-      const response = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      const db_ref_fN = ref(database, `/users/${auth.currentUser.uid}/first_name`);
-      const db_ref_lN = ref(database, `/users/${auth.currentUser.uid}/last_name`);
-      set(db_ref_fN, firstName);
-      set(db_ref_lN, lastName);
-      const name = response.user.firstName + " " + response.user.lastName;
-      const user_email = response.user.email;
-      console.log(response);
-      console.log(name + " signed up with email: " + user_email);
-      navigate("/login");
+      await registerUser(values);
+      alert("Registration successful. Please login.")
+      navigate("/login")
     } catch (error) {
       setError(error.message);
-      console.log(error)
     }
-  }
+  };
 
-  function backToLogin(event) {
-    event.preventDefault();
-    navigate("/login");
-  }
+  const backToLogin = () => navigate("/login");
 
   return (
     <div>
       <form>
         <label>
           First Name:
-          <input
-            type="firstName"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-          />
+          <input type="text" name="firstName" value={values.firstName} onChange={handleChange} />
         </label>
         <label>
           Last Name:
-          <input
-            type="lastName"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-          />
+          <input type="text" name="lastName" value={values.lastName} onChange={handleChange} />
         </label>
         <br />
         <label>
           Email:
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+          <input type="email" name="email" value={values.email} onChange={handleChange} />
         </label>
         <br />
         <label>
           Password:
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+          <input type="password" name="password" value={values.password} onChange={handleChange} />
         </label>
         <br />
         <button type="submit" onClick={handleSignUp}>Sign Up</button>
