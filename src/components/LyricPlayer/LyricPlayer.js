@@ -12,9 +12,12 @@ export const LyricPlayer = () => {
     const song = location.state?.song;
     const { music_url, album_url, artist, title, lyrics } = song || {};
 
-    
+
     const [currentLineIndex, setCurrentLineIndex] = useState(0);
-    const [score, setScore] = useState(null);
+
+    const scoreState = useState(null);
+    const [score, setScore] = scoreState;
+
     const contentRef = useRef(null);
     const audioRef = useRef(null);
 
@@ -38,12 +41,13 @@ export const LyricPlayer = () => {
             }
             return past.length - 1;
         });
+        // 
     };
 
 
     const handleAudioEnd = async () => {
         const randomScore = Math.floor(Math.random() * 100);
-        await setSongScore(score)
+        await setSongScore(randomScore);
         setScore(randomScore);
         audioRef.current.controls = false;
     }
@@ -74,7 +78,10 @@ export const LyricPlayer = () => {
                 handleTimeUpdate={handleTimeUpdate}
                 handleAudioEnd={handleAudioEnd}
             />
-            <Scoreboard score={score} />
+            <Scoreboard
+                scoreState={scoreState}
+                audioRef={audioRef}
+            />
         </div>
     );
 };

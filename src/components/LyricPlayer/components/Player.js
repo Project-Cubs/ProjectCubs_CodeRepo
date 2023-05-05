@@ -23,6 +23,7 @@ export const Player = ({
         <div className="bottom">
           <audio
             ref={audioRef}
+            muted={true}
             controls={true}
             autoPlay={true}
             name={'media'}

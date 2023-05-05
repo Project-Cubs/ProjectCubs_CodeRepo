@@ -1,3 +1,4 @@
+
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { get, ref, set, update } from "firebase/database";
 import { auth, database } from "../Firebase";
@@ -22,12 +23,14 @@ export async function signInUser({ email, password }) {
         });
 }
 
+// get currently logged in user
 export async function getUser() {
     const uid = auth.currentUser.uid
     const dbRef = ref(database, `/users/${uid}`)
     return (await get(dbRef)).val()
 }
 
+// update user data with new data
 export async function updateUser(data) {
     const uid = auth.currentUser.uid
     const dbRef = ref(database, `/users/${uid}`)

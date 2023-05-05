@@ -9,15 +9,18 @@ export function Scoreboard() {
   const [scores, setScores] = useState([]);
 
   function getHighestScore(user) {
-    const songScore = user.highScore.song || 0;
-    const quizScore = user.highScore.quiz || 0;
+    const songScore = user.highScore.song;
+    const quizScore = user.highScore.quiz;
+
     if (songScore > quizScore) {
+      // do something when songScore > quizScore
       return {
         name: `${user.firstName} ${user.lastName}`,
         type: "song",
         score: songScore
       }
     } else {
+      // do something when quizScore > songScore
       return {
         name: `${user.firstName} ${user.lastName}`,
         type: "quiz",
@@ -30,11 +33,12 @@ export function Scoreboard() {
     onValue(ref(database, "/users"), (snapshot) => {
       const users = Object.values(snapshot.val());
       if (users) {
-        setScores(users
-          .map(u => getHighestScore(u))
+        // ADD ROWS
+        const highestScores = users
+          .map(user => getHighestScore(user))
           .sort((a, b) => b.score - a.score)
-          .slice(0, 9)
-        )
+          .slice(0, 10)
+        setScores(highestScores);
       }
     })
   }, [])
@@ -47,20 +51,21 @@ export function Scoreboard() {
         <table>
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Type</th>
-              <th>Score</th>
+              <th> Name </th>
+              <th> Type </th>
+              <th> Score </th>
             </tr>
           </thead>
           <tbody>
-            {scores.map((s, i) => {
-              return <tr key={i}>
-                <td>{s.name}</td>
-                <td>{s.type}</td>
-                <td>{s.score}</td>
-              </tr>
-            }
-            )}
+            {scores.map(score => {
+              return (
+                <tr>
+                  <td> {score.name} </td>
+                  <td> {score.type} </td>
+                  <td> {score.score} </td>
+                </tr>
+              )
+            })}
           </tbody>
         </table>
       </main>
