@@ -16,7 +16,7 @@ export const LyricPlayer = () => {
     const [currentLineIndex, setCurrentLineIndex] = useState(0);
 
     const scoreState = useState(null);
-    const [score, setScore] = scoreState;
+    const setScore = scoreState[1];
 
     const contentRef = useRef(null);
     const audioRef = useRef(null);
