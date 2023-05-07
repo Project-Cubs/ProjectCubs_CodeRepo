@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 
 function WordQuiz({ words }) {
 
+    
+
     //   const words = [
     //     { word: "한글", meaning: "Korean" },
     //     { word: "기린", meaning: "Giraffe" },

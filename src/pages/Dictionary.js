@@ -1,11 +1,9 @@
-import React from "react";
-import { Bookmark } from "../components/Bookmark/Bookmark";
-import { Navbar } from "../components/Navbar/Navbar";
-import { useState } from "react";
+import React, { useState } from "react";
 import Search from "../components/Dictionary/Search";
 import Word from "../components/Dictionary/Word";
 import WordList from "../components/Dictionary/WordList";
 import WordQuiz from "../components/Dictionary/WordQuiz";
+import { Navbar } from "../components/Navbar/Navbar";
 
 export function Dictionary() {
 
@@ -13,13 +11,22 @@ export function Dictionary() {
     const [searchedWord, setSearchedWord] = useState();
     const [addedWords, setAddedWords] = useState([]);
 
+    // search, word, wordList, wordQuiz
+
+    // input: word
     const handleSearchWord = (word) => {
-        setSearchedWord(word);
-        setCurrentPage("word");
+        setSearchedWord(word);      // setting the state searchedWord
+        setCurrentPage("word");     // going to next page
     };
 
     const handleAddWord = (word) => {
+        /* [
+            {안녕, hello, englishDefinition, koreanDefinition}
+            {남자, boy, englishDefinition, koreanDefinition}
+        ]
+        */
         setAddedWords((prevWords) => [...prevWords, word]);
+        // add to existing addedWords array
         setCurrentPage("wordList");
     };
 
