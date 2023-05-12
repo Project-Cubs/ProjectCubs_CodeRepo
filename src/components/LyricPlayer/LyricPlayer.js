@@ -3,6 +3,9 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { parseStringPromise } from 'xml2js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './LyricPlayer.css';
+import { addWord } from '../Bookmark/Bookmark';
+import { auth, database } from '../../services/Firebase';
+import { push, ref, set } from 'firebase/database';
 
 export const LyricPlayer = () => {
 
@@ -35,7 +38,7 @@ export const LyricPlayer = () => {
             let score = Math.floor(Math.random() * 100);
             const scoreBoard = document.getElementsByClassName("score");
             const scoreBoardText = document.getElementsByClassName("scoreDisplay");
-            scoreBoard[0].style.opacity = 1;
+            scoreBoard[0].style.display = "inline-block";
             scoreBoardText[0].innerHTML = "Score: " + score + "%";
         }
     };
@@ -58,9 +61,20 @@ export const LyricPlayer = () => {
         const text = await response.text();
 
         const json = await parseStringPromise(text);
+        //console.log(json);
         const definition = json.channel.item?.[0].sense?.[0].translation?.[0].trans_dfn;
-        definition ? alert(`Definition: ${definition}`) : alert("No definition found");
+        // definition ? alert(`Definition: ${definition}`) : alert("No definition found");
+        const definitionDispaly = document.getElementsByClassName("englishDefinition");
+        const definitionDiv = document.getElementsByClassName("definition");
+        document.getElementsByClassName("englishWord")[0].innerText = json.channel.item?.[0].sense?.[0].translation?.[0].trans_word[0];
+        document.getElementsByClassName("koreanWord")[0].innerText = word;
+        definitionDiv[0].style.display = "inline-block";
+        definitionDispaly[0].innerText = definition;
+
+        //add title to database
+         
     }
+
     /*
     async function getOriginalForm(word) {
         const url = process.env.REACT_APP_DICT_URL2;
@@ -94,7 +108,7 @@ export const LyricPlayer = () => {
             const lyrics = words.map((word, i) => {
                 if (koreanWords?.includes(word)) {
                     return (
-                        <a key={i} onClick={() => getKoreanDefinition(word)}> {` ${word} `} &nbsp;</a>
+                        <a key={i} onClick={() => getKoreanDefinition(word)}> {` ${word.replace(" ","")} `} &nbsp;</a>
                     )
                 } else {
                     return ` ${word} `
@@ -158,6 +172,24 @@ export const LyricPlayer = () => {
                     }}>Other songs</button>
                 </div>
             </div>
+
+            <div className='definition'>
+                <h1 className='koreanWord'></h1>
+                <h1 className='englishWord'></h1>
+                <h1 className='englishDefinition'></h1>
+                <h3 onClick={function(){
+                    const definition = document.getElementsByClassName("definition");
+                    definition[0].style.display = "none";
+                }}>Close</h3>
+                <h1 onClick={function(){
+                    //add to database
+                    const def_ref = ref(database, `users/${auth.currentUser.uid}/bookmarked_words`)
+                    push(def_ref, {
+                        title: document.getElementsByClassName("koreanWord")[0].innerText,
+                    })
+                }}>⭐ Add to bookmark ⭐</h1>
+            </div>
+            
         </div>
     );
 };

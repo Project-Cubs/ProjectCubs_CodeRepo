@@ -1,5 +1,5 @@
 .pbody {
-    font-family: "Montserrat", sans-serif;
+    font-family: noto-sans, sans-serif;
     min-height: 100vh;
     max-height: 100vh;
     margin: 0;
@@ -123,6 +123,7 @@
 }
 
 .score{
+    display: none;
     background-color: #787878;
     width: 50vw;
     height: 70vh;
@@ -133,7 +134,6 @@
     text-align: center;
     justify-content: center;
     transform: translate(-50%, -50%);
-    opacity: 0.0;
   }
   
   .scoreDisplay{
@@ -168,3 +168,21 @@
   .icons {
     font-size: 20px;
   }
+
+  .definition{
+    display: none;
+    background-color: #787878;
+    position: absolute;
+    padding: 20px;
+    width: 50vw;
+    height: 70vh;
+    top: 50%;
+    left: 50%;
+    text-align: center;
+    justify-content: center;
+    transform: translate(-50%, -50%);
+  }
+
+  /* .definition h1{
+    font-weight: 600;
+  } */

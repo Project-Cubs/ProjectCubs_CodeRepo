@@ -12,11 +12,12 @@
     "@testing-library/user-event": "^13.5.0",
     "babel-plugin-macros": "^3.1.0",
     "bootstrap": "^5.2.3",
-    "eslint-config-react-app": "^7.0.1",
+    "chart.js": "^3.9.1",
     "firebase": "^9.18.0",
     "http-proxy-middleware": "^2.0.6",
     "https": "^1.0.0",
     "react": "^18.2.0",
+    "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.8.2",
     "react-scripts": "4.0.3",
@@ -31,12 +32,6 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "git": "git add .; git commit -m \"update\"; git push"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
   },
   "browserslist": {
     "production": [
@@ -56,6 +51,8 @@
   },
   "babel": {
     "presets": [],
-    "plugins": ["macros"]
+    "plugins": [
+      "macros"
+    ]
   }
 }
