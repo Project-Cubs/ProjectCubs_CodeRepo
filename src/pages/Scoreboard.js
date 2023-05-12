@@ -51,15 +51,17 @@ export function Scoreboard() {
         <table>
           <thead>
             <tr>
+              <th> Ranking </th>
               <th> Name </th>
               <th> Type </th>
               <th> Score </th>
             </tr>
           </thead>
           <tbody>
-            {scores.map(score => {
+            {scores.map((score, index) => {
               return (
-                <tr>
+                <tr key={index}>
+                  <td> {index + 1} </td>
                   <td> {score.name} </td>
                   <td> {score.type} </td>
                   <td> {score.score} </td>
