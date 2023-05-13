@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "../Dictionary.css";
 const WordList = ({ words, onStartQuiz }) => {
 
@@ -8,7 +8,7 @@ const WordList = ({ words, onStartQuiz }) => {
       <section className="word-list">
         {words.map((word, index) => {
 
-          const { koreanWord, koreanDefinition, englishWord, englishDefinition } = word;
+          const { koreanWord, koreanDefinition, englishWord } = word;
 
           return (
             <aside className="wordcard" key={index}>

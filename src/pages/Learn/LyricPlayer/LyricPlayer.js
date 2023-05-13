@@ -12,8 +12,6 @@ export const LyricPlayer = () => {
     const song = location.state?.song;
     const { music_url, album_url, artist, title, lyrics } = song || {};
 
-    const navigate = useNavigate();
-
     const [currentLineIndex, setCurrentLineIndex] = useState(0);
 
     const scoreState = useState(null);

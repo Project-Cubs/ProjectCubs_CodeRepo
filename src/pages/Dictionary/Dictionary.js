@@ -38,10 +38,6 @@ export function Dictionary() {
         gotoNextPage();
     };
 
-    const handleAnswerSelected = (option) => {
-        console.log("Selected option:", option);
-    };
-
     return (
         <div className="App">
             <Navbar />

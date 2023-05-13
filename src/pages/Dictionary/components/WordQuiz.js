@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { setQuizScore } from "../../../utils/Firebase/Score/score.firebase";
 import "../Dictionary.css";
-import { set } from "firebase/database";
 
 function WordQuiz({ words }) {
 
     const [numCorrect, setNumCorrect] = useState(0);
     const [currentWordIndex, setCurrentWordIndex] = useState(0);
-    const [selectedOption, setSelectedOption] = useState("");
     const [options, setOptions] = useState([])
 
     useEffect(
