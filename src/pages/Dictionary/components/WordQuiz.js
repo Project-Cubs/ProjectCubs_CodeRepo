@@ -1,19 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { setQuizScore } from "../../../utils/Firebase/Score/score.firebase";
+import "../Dictionary.css";
+import { set } from "firebase/database";
 
 function WordQuiz({ words }) {
 
-    
-
-    //   const words = [
-    //     { word: "한글", meaning: "Korean" },
-    //     { word: "기린", meaning: "Giraffe" },
-    //     { word: "검은색", meaning: "Black" },
-    //     { word: "애국가", meaning: "National anthem" },
-    //     { word: "하늘", meaning: "Sky" },
-    //     { word: "공부", meaning: "Study" },
-    //   ]
-
-    const [score, setScore] = useState(0);
+    const [numCorrect, setNumCorrect] = useState(0);
     const [currentWordIndex, setCurrentWordIndex] = useState(0);
     const [selectedOption, setSelectedOption] = useState("");
     const [options, setOptions] = useState([])
@@ -38,47 +30,40 @@ function WordQuiz({ words }) {
         return array;
     }
 
-    function handleSelected(meaning) {
-        setSelectedOption(meaning);
-    }
-
-    function handleClicked() {
-        const currentAnswer = words[currentWordIndex].meaning;
-        if (selectedOption === currentAnswer) {
-            setScore(score + 1);
+    async function handleClicked(selected) {
+        const currentAnswer = words[currentWordIndex].englishWord;
+        let newCorrect = numCorrect;
+        if (selected === currentAnswer) {
+            newCorrect++;
+            setNumCorrect(newCorrect);
         }
         if (currentWordIndex === words.length - 1) {
-            alert(`Your score is : ${score}`)
+            const score = newCorrect / words.length * 100;
+            alert(`Your score is : ${score}`);
+            await setQuizScore(score);
+            setNumCorrect(0);
+            setCurrentWordIndex(0);
         } else {
             setCurrentWordIndex(currentWordIndex + 1);
         }
     }
 
     return (
-        <div>
-            <h1>Word Quiz</h1>
-            <hr />
-            <h2> {words[currentWordIndex].koreanWord} </h2>
-            <p> Score: {score} </p>
-            <div>
+        <header>
+            <h1> {words[currentWordIndex].koreanWord} </h1>
+            <h3> Correct: {numCorrect} </h3>
+            <div className="options_container">
                 {
                     options.map((word, i) => {
-                        return <label key={i}>
-                            <input
-                                type="radio"
-                                name="option"
-                                value={word.englishWord}
-                                onChange={() => {
-                                    handleSelected(word.englishWord)
-                                }}
-                            />
-                            {word.englishWord}
-                        </label>
+                        return (
+                            <button className="option_button" key={i} onClick={() => handleClicked(word.englishWord)}>
+                                {word.englishWord}
+                            </button>
+                        )
                     })
                 }
             </div>
-            <button onClick={handleClicked} > Answer </button>
-        </div>
+        </header>
     );
 }
 
