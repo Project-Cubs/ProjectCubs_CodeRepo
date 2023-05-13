@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/ProjectCubs_CodeRepo/static/css/main.23af9042.chunk.css",
-    "main.js": "/ProjectCubs_CodeRepo/static/js/main.0d508faa.chunk.js",
-    "main.js.map": "/ProjectCubs_CodeRepo/static/js/main.0d508faa.chunk.js.map",
+    "main.js": "/ProjectCubs_CodeRepo/static/js/main.97777f3b.chunk.js",
+    "main.js.map": "/ProjectCubs_CodeRepo/static/js/main.97777f3b.chunk.js.map",
     "runtime-main.js": "/ProjectCubs_CodeRepo/static/js/runtime-main.2583f8d6.js",
     "runtime-main.js.map": "/ProjectCubs_CodeRepo/static/js/runtime-main.2583f8d6.js.map",
     "static/js/2.cca61617.chunk.js": "/ProjectCubs_CodeRepo/static/js/2.cca61617.chunk.js",
@@ -15,6 +15,6 @@
     "static/js/runtime-main.2583f8d6.js",
     "static/js/2.cca61617.chunk.js",
     "static/css/main.23af9042.chunk.css",
-    "static/js/main.0d508faa.chunk.js"
+    "static/js/main.97777f3b.chunk.js"
   ]
 }
