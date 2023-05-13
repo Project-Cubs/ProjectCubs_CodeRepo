@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/ProjectCubs_CodeRepo/static/css/main.7a3382dc.chunk.css",
-    "main.js": "/ProjectCubs_CodeRepo/static/js/main.92fa26c4.chunk.js",
-    "main.js.map": "/ProjectCubs_CodeRepo/static/js/main.92fa26c4.chunk.js.map",
+    "main.css": "/ProjectCubs_CodeRepo/static/css/main.23af9042.chunk.css",
+    "main.js": "/ProjectCubs_CodeRepo/static/js/main.0d508faa.chunk.js",
+    "main.js.map": "/ProjectCubs_CodeRepo/static/js/main.0d508faa.chunk.js.map",
     "runtime-main.js": "/ProjectCubs_CodeRepo/static/js/runtime-main.2583f8d6.js",
     "runtime-main.js.map": "/ProjectCubs_CodeRepo/static/js/runtime-main.2583f8d6.js.map",
-    "static/js/2.993832eb.chunk.js": "/ProjectCubs_CodeRepo/static/js/2.993832eb.chunk.js",
-    "static/js/2.993832eb.chunk.js.map": "/ProjectCubs_CodeRepo/static/js/2.993832eb.chunk.js.map",
+    "static/js/2.cca61617.chunk.js": "/ProjectCubs_CodeRepo/static/js/2.cca61617.chunk.js",
+    "static/js/2.cca61617.chunk.js.map": "/ProjectCubs_CodeRepo/static/js/2.cca61617.chunk.js.map",
     "index.html": "/ProjectCubs_CodeRepo/index.html",
-    "static/css/main.7a3382dc.chunk.css.map": "/ProjectCubs_CodeRepo/static/css/main.7a3382dc.chunk.css.map",
-    "static/js/2.993832eb.chunk.js.LICENSE.txt": "/ProjectCubs_CodeRepo/static/js/2.993832eb.chunk.js.LICENSE.txt"
+    "static/css/main.23af9042.chunk.css.map": "/ProjectCubs_CodeRepo/static/css/main.23af9042.chunk.css.map",
+    "static/js/2.cca61617.chunk.js.LICENSE.txt": "/ProjectCubs_CodeRepo/static/js/2.cca61617.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.2583f8d6.js",
-    "static/js/2.993832eb.chunk.js",
-    "static/css/main.7a3382dc.chunk.css",
-    "static/js/main.92fa26c4.chunk.js"
+    "static/js/2.cca61617.chunk.js",
+    "static/css/main.23af9042.chunk.css",
+    "static/js/main.0d508faa.chunk.js"
   ]
 }
