@@ -1,12 +1,10 @@
 // src/pages/Dashboard.js
 import React, { useState } from 'react';
-import DonutChart from './DonutChart';
-// import { SongCard } from '../Cards/Cards';
+import DonutChart from '../../../components/Charts/DonutChart';
 
 import { Link } from 'react-router-dom';
+import { RecentSongCard, RecentWordCard } from '../../../components/Cards/Cards';
 import "./Dashboard.css";
-import SongCard from './SongCard';
-import WordCard from './WordCard';
 
 const Dashboard = () => {
 
@@ -55,7 +53,7 @@ const Dashboard = () => {
                         <Link to={"/learn"}>View All</Link>
                     </h2>
                     {songs.map((song, index) => (
-                        <SongCard key={index} {...song} />
+                        <RecentSongCard key={index} {...song} />
                     ))}
                 </div>
                 <div className="recent-words">
@@ -64,7 +62,7 @@ const Dashboard = () => {
                         <Link to={"/dictionary"}>View All</Link>
                     </h2>
                     {words.map((word, index) => (
-                        <WordCard key={index} {...word} />
+                        <RecentWordCard key={index} {...word} />
                     ))}
                 </div>
             </section>

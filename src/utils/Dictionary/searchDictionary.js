@@ -9,13 +9,16 @@ export const searchDictionary = async (word) => {
     const response = await fetch(`${url}?key=${key}&q=${q}&translated=${translated}&trans_lang=${trans_lang}`);
     const text = await response.text();
     const json = await parseStringPromise(text);
-    console.log(json);
+    console.log("Dictionary result: ", json);
     const wordObj = json.channel.item?.[0].sense?.[0];
+    if (!wordObj) {
+        return null;
+    } else {
+        const koreanWord = word;
+        const koreanDefinition = wordObj.definition[0];
+        const englishWord = wordObj.translation?.[0].trans_word[0];
+        const englishDefinition = wordObj.translation?.[0].trans_dfn[0];
 
-    const koreanWord = word;
-    const koreanDefinition = wordObj.definition[0];
-    const englishWord = wordObj.translation?.[0].trans_word[0];
-    const englishDefinition = wordObj.translation?.[0].trans_dfn[0];
-
-    return { koreanWord, koreanDefinition, englishWord, englishDefinition }
+        return { koreanWord, koreanDefinition, englishWord, englishDefinition }
+    }
 };

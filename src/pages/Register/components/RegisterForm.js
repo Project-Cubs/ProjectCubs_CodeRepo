@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { registerUser } from "../../Firebase/Users/users.firebase";
+import { registerUser } from "../../../utils/Firebase/Users/users.firebase";
 
 export function RegisterForm() {
   const [values, setValues] = useState({ firstName: "", lastName: "", email: "", password: "" });

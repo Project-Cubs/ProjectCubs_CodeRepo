@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { downloadSongs } from "../Firebase/Songs/songs.firebase";
-import { SongCard } from "../components/Cards/Cards";
-import { Navbar } from "../components/Navbar/Navbar";
+import { SongCard } from "../../components/Cards/Cards";
+import { Navbar } from "../../components/Navbar/Navbar";
+import { downloadSongs } from "../../utils/Firebase/Songs/songs.firebase";
 
 export function Learn () {
 

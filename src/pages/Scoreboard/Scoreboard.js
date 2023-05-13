@@ -1,7 +1,8 @@
-import { onValue, ref } from "firebase/database";
+
 import { useEffect, useState } from "react";
-import { database } from "../Firebase/Firebase";
-import { Navbar } from "../components/Navbar/Navbar";
+import { Navbar } from "../../components/Navbar/Navbar";
+import { onValue, ref } from "firebase/database";
+import { database } from "../../utils/Firebase/Firebase";
 
 
 export function Scoreboard() {

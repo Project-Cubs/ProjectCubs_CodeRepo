@@ -1,6 +1,25 @@
 import { useNavigate } from 'react-router-dom';
 
-export function SongCard({ song }) {
+export const RecentWordCard = ({ koreanWord, englishWord }) => {
+    return (
+        <div className="word-card">
+            <p>{koreanWord}</p>
+            <p>{englishWord}</p>
+        </div>
+    );
+};
+
+export const RecentSongCard = ({ album_url, title, artist }) => {
+    return (
+        <div className="song-card">
+            <img src={album_url} alt="Album Cover" />
+            <h3>{title}</h3>
+            <p>{artist}</p>
+        </div>
+    );
+};
+
+export const SongCard = ({ song }) => {
     const { album_url, artist, title } = { ...song };
     const navigate = useNavigate();
     return (

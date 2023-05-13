@@ -1,17 +1,18 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import "./LyricPlayer.css";
-import { BackButton } from './components/BackButton';
+import { BackButton } from '../../../components/Buttons/BackButton';
 import { Lyrics } from './components/Lyrics';
 import { Player } from './components/Player';
 import { Scoreboard } from './components/Scoreboard';
-import { setSongScore } from '../../Firebase/Score/score.firebase';
+import { setSongScore } from '../../../utils/Firebase/Score/score.firebase';
 
 export const LyricPlayer = () => {
     const location = useLocation();
     const song = location.state?.song;
     const { music_url, album_url, artist, title, lyrics } = song || {};
 
+    const navigate = useNavigate();
 
     const [currentLineIndex, setCurrentLineIndex] = useState(0);
 
@@ -62,7 +63,7 @@ export const LyricPlayer = () => {
 
     return (
         <div className="pbody">
-            <BackButton />
+            <BackButton to={"/learn"} />
             <div className="content" ref={contentRef}>
                 <Lyrics
                     lyrics={lyrics}

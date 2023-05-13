@@ -1,7 +1,6 @@
 
-import Dashboard from "../components/Dashboard/Dashboard";
-import { Navbar } from "../components/Navbar/Navbar";
-
+import { Navbar } from "../../components/Navbar/Navbar";
+import Dashboard from "./components/Dashboard";
 
 export function Home() {
   return (

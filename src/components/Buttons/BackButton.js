@@ -1,17 +1,17 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-export const BackButton = () => {
+export const BackButton = ({to, onClick}) => {
   return (
     <div>
-      <NavLink to="/learn" className="Links backButton">
+      <Link to={to} onClick={onClick} className="Links backButton">
         <FontAwesomeIcon
           icon="fa-solid fa-arrow-left"
           style={{ color: '#ffffff' }}
           className="icons"
         />
-      </NavLink>
+      </Link>
     </div>
   );
 };

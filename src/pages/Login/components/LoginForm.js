@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { signInUser } from "../../Firebase/Users/users.firebase";
+import { signInUser } from "../../../utils/Firebase/Users/users.firebase";
+
 
 export function LoginForm() {
     const [email, setEmail] = useState("test@gmail.com");

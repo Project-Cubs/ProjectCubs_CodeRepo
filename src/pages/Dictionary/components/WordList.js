@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const WordList = ({ words, onStartQuiz }) => {
+
   return (
     <div>
       <h1>Bookmark</h1>

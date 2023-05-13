@@ -11,7 +11,7 @@ const Word = ({ word, onAddWord }) => {
         <h3>{englishWord} </h3>
         <p>{koreanDefinition}</p>
         <p>{englishDefinition}</p>
-        <button onClick={() => onAddWord(word)}>Add Word</button>
+        <button onClick={async () => await onAddWord(word)}>Add Word</button>
       </div>
     </div>
   );

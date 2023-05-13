@@ -1,15 +1,16 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
-import ProtectedRoutes from './components/ProtectedRoutes';
-import { Dictionary } from './pages/Dictionary';
-import { Home } from "./pages/Home";
-import { Learn } from "./pages/Learn";
-import { Scoreboard } from './pages/Scoreboard';
-import { Login } from "./pages/Login";
-import { Register } from "./pages/Register";
-import { LyricPlayer } from './components/LyricPlayer/LyricPlayer';
+
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
+import ProtectedRoutes from './components/Router/ProtectedRoutes';
+import { Dictionary } from './pages/Dictionary/Dictionary';
+import { Learn } from './pages/Learn/Learn';
+import { Home } from './pages/Home/Home';
+import { Login } from './pages/Login/Login';
+import { Register } from './pages/Register/Register';
+import { Scoreboard } from './pages/Scoreboard/Scoreboard';
+import { LyricPlayer } from './pages/Learn/LyricPlayer/LyricPlayer';
 
 library.add(fas)
 

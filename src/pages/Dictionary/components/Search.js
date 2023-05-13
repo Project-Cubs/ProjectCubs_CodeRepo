@@ -1,16 +1,22 @@
 import { useState } from "react";
-import { searchDictionary } from "../../utils/searchDictionary";
+import { searchDictionary } from "../../../utils/Dictionary/searchDictionary";
 
 const Search = ({ onSearchWord }) => {
 
     const [word, setWord] = useState("");
 
     const handleClick = async (event) => {
-        // const { koreanWord, koreanDefinition, englishWord, englishDefinition } = searchDictionary(word);
-
         event.preventDefault();
-        const dictionaryResult = await searchDictionary(word);
-        onSearchWord(dictionaryResult);
+        try {
+            const dictionaryResult = await searchDictionary(word);
+            if (dictionaryResult) {
+                onSearchWord(dictionaryResult);
+            } else {
+                alert("No word found");
+            }
+        } catch (error) {
+            alert("Incorrect search. Please try again.");
+        }
     }
 
 
