@@ -2,7 +2,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Navbar } from "../../components/Navbar/Navbar";
-import { addBookmark, getBookmark } from "../../utils/Firebase/Bookmark/bookmark.firebase";
 import Word from "./components/Word";
 import WordList from "./components/WordList";
 import WordQuiz from "./components/WordQuiz";
@@ -28,9 +27,6 @@ export function Dictionary() {
     };
 
     const handleAddWord = async (word) => {
-        // setAddedWords((prevWords) => [...prevWords, word]);
-        await addBookmark(word);
-        setAddedWords(await getBookmark());
         gotoNextPage();
     };
 
