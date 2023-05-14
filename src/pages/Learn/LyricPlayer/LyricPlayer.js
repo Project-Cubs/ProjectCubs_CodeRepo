@@ -6,14 +6,18 @@ import { Lyrics } from './components/Lyrics';
 import { Player } from './components/Player';
 import { Scoreboard } from './components/Scoreboard';
 import { setSongScore } from '../../../utils/Firebase/Score/score.firebase';
+import { Definition } from './components/Definition';
 
 export const LyricPlayer = () => {
+
+    const [popupInfo, setPopupInfo] = useState();
+
     const location = useLocation();
     const song = location.state?.song;
     const { music_url, album_url, artist, title, lyrics } = song || {};
 
     const [currentLineIndex, setCurrentLineIndex] = useState(0);
-
+ 
     const scoreState = useState(null);
     const setScore = scoreState[1];
 
@@ -40,7 +44,6 @@ export const LyricPlayer = () => {
             }
             return past.length - 1;
         });
-        // 
     };
 
 
@@ -64,6 +67,7 @@ export const LyricPlayer = () => {
             <BackButton to={"/learn"} />
             <div className="content" ref={contentRef}>
                 <Lyrics
+                    setPopupInfo={setPopupInfo}
                     lyrics={lyrics}
                     currentLineIndex={currentLineIndex}
                 />
@@ -81,6 +85,7 @@ export const LyricPlayer = () => {
                 scoreState={scoreState}
                 audioRef={audioRef}
             />
+            {popupInfo && <Definition popupInfo={popupInfo} setPopupInfo={setPopupInfo}/>}
         </div>
     );
 };
