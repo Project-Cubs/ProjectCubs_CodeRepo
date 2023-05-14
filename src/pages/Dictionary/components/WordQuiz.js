@@ -17,7 +17,7 @@ function WordQuiz({ words }) {
             const shuffledOtherWords = shuffle(otherWords).slice(0, 3);
             setOptions(shuffle([...shuffledOtherWords, currentWord]));
         },
-        [currentWordIndex]
+        [currentWordIndex, words]
     )
 
     function shuffle(array) {
