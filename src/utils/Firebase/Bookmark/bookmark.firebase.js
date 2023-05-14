@@ -22,4 +22,5 @@ export async function getBookmark() {
     const user = await getUser();
     // ADD CODE HERE
     console.log(user);
+    return user.bookmark;
 }
