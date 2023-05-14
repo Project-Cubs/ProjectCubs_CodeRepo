@@ -1,6 +1,7 @@
 
 import React from "react";
 import "../Dictionary.css";
+
 const Word = ({ word, onAddWord }) => {
   const { koreanWord, koreanDefinition, englishWord, englishDefinition } = word;
 

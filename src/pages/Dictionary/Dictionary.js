@@ -6,6 +6,8 @@ import Word from "./components/Word";
 import WordList from "./components/WordList";
 import WordQuiz from "./components/WordQuiz";
 import Search from "./components/Search";
+import { addBookmark, getBookmark } from "../../utils/Firebase/Bookmark/bookmark.firebase";
+import { setLogLevel } from "firebase/app";
 
 export function Dictionary() {
 
@@ -27,6 +29,8 @@ export function Dictionary() {
     };
 
     const handleAddWord = async (word) => {
+        await addBookmark(word);
+        setAddedWords(await getBookmark());
         gotoNextPage();
     };
 
