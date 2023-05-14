@@ -30,8 +30,7 @@ export function RegisterForm() {
       const db_ref_lN = ref(database, `/users/${auth.currentUser.uid}/last_name`);
       set(db_ref_fN, firstName);
       set(db_ref_lN, lastName);
-      const db_ref_songsPlayed = ref(database, `/users/${auth.currentUser.uid}/songs_played`);
-      set(db_ref_songsPlayed, []);
+      
       const name = response.user.firstName + " " + response.user.lastName;
       const user_email = response.user.email;
       console.log(response);

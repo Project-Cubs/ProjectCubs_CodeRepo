@@ -3,8 +3,10 @@ import DonutChart from "./DonutChart" //why error
 import SongCard from "./SongCard"
 import WordCard from "./WordCard"
 import './Dashboard.css'
-import { auth } from "../../services/Firebase"
-import { ref } from "firebase/database"
+import { auth, database } from "../../services/Firebase"
+import { get, ref } from "firebase/database"
+import { db_get } from "../../services/Database"
+import { useState } from "react"
 
 const donutChartData = {
     labels: ["Completed", "Remaining"],
@@ -30,11 +32,29 @@ const words = [
 ]
 
 const Dashboard = () => {
+    const [name, setName] = useState("")
+
     function getName(){
-        const user = auth.currentUser
-        console.log(user)
-        return user ? user.displayName : "User"
+        // const user = auth.currentUser;
+        auth.onAuthStateChanged((user) => {
+            console.log("user", user)
+            if(user && !name){
+                console.log("user uid", user.uid)
+                //get name from database
+                db_get(`/users/${user.uid}/first_name`).then(result => {
+                    setName(result)
+                })
+
+                db_get(`/users/${user.uid}/last_name`).then(result => {
+                    setName((prevName) => prevName + " " + result);
+                })
+            
+            }
+        })
+
+        return name
     }
+
     return (
         <div className="dashboard">
             <div className="name-section">

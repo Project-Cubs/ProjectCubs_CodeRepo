@@ -3,19 +3,20 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { parseStringPromise } from 'xml2js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './LyricPlayer.css';
-import { addWord } from '../Bookmark/Bookmark';
+import { setSongScore } from '../../services/score/score.firebase';
+import { get, push, ref, remove, set } from 'firebase/database';
 import { auth, database } from '../../services/Firebase';
-import { push, ref, set } from 'firebase/database';
 
 export const LyricPlayer = () => {
-
+    const scoreState = useState(0);
+    const [score, setScore] = useState(0);
     const location = useLocation();
     const song = location.state?.song;
 
     const { music_url, title, artist, album_url, lyrics } = { ...song }
     const [currentLineIndex, setCurrentLineIndex] = useState(0);
     const contentRef = useRef(null);
-    const videoRef = useRef(null);
+    const audioRef = useRef(null);
     const align = () => {
         const highlightedElement = document.querySelector('.highlighted');
         if (highlightedElement && contentRef.current) {
@@ -27,21 +28,59 @@ export const LyricPlayer = () => {
         }
     };
     const handleTimeUpdate = () => {
-        const time = videoRef.current.currentTime * 1000;
+        const time = audioRef.current.currentTime * 1000;
+        //console.log(time);
         const past = lyrics.filter((item) => item.time < time);
         if (past.length !== currentLineIndex) {
             setCurrentLineIndex(past.length - 1);
             align();
         }
-        // console.log(videoRef.current.currentTime + '/' + videoRef.current.duration);
-        if (videoRef.current.currentTime > videoRef.current.duration - 0.2) {
-            let score = Math.floor(Math.random() * 100);
-            const scoreBoard = document.getElementsByClassName("score");
-            const scoreBoardText = document.getElementsByClassName("scoreDisplay");
-            scoreBoard[0].style.display = "inline-block";
-            scoreBoardText[0].innerHTML = "Score: " + score + "%";
-        }
     };
+
+    async function handleAudioEnd(){
+        console.log("handleAudioEnd");
+        const randomScore = Math.floor(Math.random() * 100);
+        await setSongScore(randomScore);
+        setScore(randomScore);
+        const scoreDisplay = document.getElementsByClassName("score");
+        scoreDisplay[0].style.display = "inline-block";
+        audioRef.current.controls = false
+        audioRef.current.currentTime = 0;
+        //if database songsPlayed directory does not exists
+        //create directory
+        console.log(!!location.state?.songsPlayed)
+
+        if (!!location.state?.songsPlayed) {
+            set(ref(database, `users/${auth.currentUser.uid}/songsPlayed`), [song]);
+          } else {
+            // Get reference to songsPlayed
+            const songsPlayedRef = ref(
+              database,
+              `users/${auth.currentUser.uid}/songsPlayed`
+            );
+        
+            get(songsPlayedRef)
+              .then((snapshot) => {
+                let songsPlayedLength = 0;
+                snapshot.forEach(() => {
+                  songsPlayedLength++;
+                });
+                console.log("Length of songsPlayed:", songsPlayedLength);
+
+                if (songsPlayedLength >= 3) {
+                    // Remove first song
+                    // remove(songsPlayedRef, snapshot.child("0").key);
+                    
+                }
+
+        
+                push(songsPlayedRef, song);
+              })
+          }
+        
+        
+    }
+
     useEffect(() => {
         window.addEventListener('resize', align);
         return () => {
@@ -61,35 +100,10 @@ export const LyricPlayer = () => {
         const text = await response.text();
 
         const json = await parseStringPromise(text);
-        //console.log(json);
         const definition = json.channel.item?.[0].sense?.[0].translation?.[0].trans_dfn;
-        // definition ? alert(`Definition: ${definition}`) : alert("No definition found");
-        const definitionDispaly = document.getElementsByClassName("englishDefinition");
-        const definitionDiv = document.getElementsByClassName("definition");
-        document.getElementsByClassName("englishWord")[0].innerText = json.channel.item?.[0].sense?.[0].translation?.[0].trans_word[0];
-        document.getElementsByClassName("koreanWord")[0].innerText = word;
-        definitionDiv[0].style.display = "inline-block";
-        definitionDispaly[0].innerText = definition;
-
-        //add title to database
-         
+        definition ? alert(`Definition: ${definition}`) : alert("No definition found");
     }
-
-    /*
-    async function getOriginalForm(word) {
-        const url = process.env.REACT_APP_DICT_URL2;
-        const key = process.env.REACT_APP_DICT_KEY2;
-
-        const q = word;
-        const response = await fetch(`${url}?key=${key}&q=${q}`);
-        
-        const test = await response.text();
-
-        const json = await parseStringPromise(test);
-        
-        const basic = json.channel.item?.[0].sense?.[0].basicformat?.[0].basic_form;
-    }
-    */
+    
 
     function extractKoreanWords(sentence) {
         const koreanRegex = /[\uAC00-\uD7AF]+/g;
@@ -108,7 +122,7 @@ export const LyricPlayer = () => {
             const lyrics = words.map((word, i) => {
                 if (koreanWords?.includes(word)) {
                     return (
-                        <a key={i} onClick={() => getKoreanDefinition(word)}> {` ${word.replace(" ","")} `} &nbsp;</a>
+                        <a key={i} onClick={() => getKoreanDefinition(word)}> {` ${word} `} &nbsp;</a>
                     )
                 } else {
                     return ` ${word} `
@@ -144,52 +158,42 @@ export const LyricPlayer = () => {
                         <a className="artist">{artist}</a>
                     </div>
                     <div className="bottom">
-                        <video
-                            ref={videoRef}
+                        <audio
+                            ref={audioRef}
                             controls={true}
-                            autoPlay={true}
                             name={"media"}
-                            loop={true}
+                            autoPlay={true}
+                            loop={false}
                             onTimeUpdate={handleTimeUpdate}
+                            onEnded={handleAudioEnd}
                         >
                             <source src={music_url} type="audio/mpeg"></source>
-                        </video>
+                        </audio>
                     </div>
                 </div>
             </div>
 
             <div className='score'>
-                <h1 className='scoreDisplay'></h1>
+                <h1 className='scoreDisplay'>Your Score</h1>
+                <h1>{score}</h1>
                 <div className='scoreaBoardNavBtn'>
                     <button onClick={function () {
                         alert("Scoreboard")
                     }}>Scoreboard</button>
                     <button onClick={function () {
-                        alert("Practice Again")
+                        setScore(0);
+                        audioRef.current.currentTime = 0;
+                        audioRef.current.controls = true
+                        audioRef.current.play()
+                        const scoreDisplay = document.getElementsByClassName("score");
+                        scoreDisplay[0].style.display = "none";
                     }}>Practice Again</button>
                     <button onClick={function () {
-                        alert("Other songs")
+                        audioRef.autoPlay = true;
                     }}>Other songs</button>
                 </div>
             </div>
 
-            <div className='definition'>
-                <h1 className='koreanWord'></h1>
-                <h1 className='englishWord'></h1>
-                <h1 className='englishDefinition'></h1>
-                <h3 onClick={function(){
-                    const definition = document.getElementsByClassName("definition");
-                    definition[0].style.display = "none";
-                }}>Close</h3>
-                <h1 onClick={function(){
-                    //add to database
-                    const def_ref = ref(database, `users/${auth.currentUser.uid}/bookmarked_words`)
-                    push(def_ref, {
-                        title: document.getElementsByClassName("koreanWord")[0].innerText,
-                    })
-                }}>⭐ Add to bookmark ⭐</h1>
-            </div>
-            
         </div>
     );
 };

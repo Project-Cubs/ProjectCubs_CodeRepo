@@ -1,5 +1,6 @@
 import {
-    signInWithEmailAndPassword
+    signInWithEmailAndPassword,
+    setPersistence, browserSessionPersistence 
 } from "firebase/auth";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -14,19 +15,23 @@ export function LoginForm() {
     const handleLogin = (e) => {  //can make it faster by using async await
         e.preventDefault();
 
-        signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                const user = userCredential.user;
-                localStorage.setItem("user", JSON.stringify(user));
-                console.log("Signed in as user:", user);
-                navigate("/");
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.error(`Error signing in: ${errorCode} - ${errorMessage}`);
-                setError(`Error signing in: ${errorCode} - ${errorMessage}`);
-            });
+        setPersistence(auth, browserSessionPersistence).then(()=> {
+            signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                    localStorage.setItem("user", JSON.stringify(user));
+                    console.log("Signed in as user:", user);
+                    navigate("/");
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    console.error(`Error signing in: ${errorCode} - ${errorMessage}`);
+                    setError(`Error signing in: ${errorCode} - ${errorMessage}`);
+                });
+        }).catch((error) => {
+            console.log(error)
+        })
     };
 
     const redirectToRegister = (e) => {
