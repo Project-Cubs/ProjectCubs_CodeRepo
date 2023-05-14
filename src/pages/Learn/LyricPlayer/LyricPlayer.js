@@ -6,6 +6,7 @@ import { Lyrics } from './components/Lyrics';
 import { Player } from './components/Player';
 import { Scoreboard } from './components/Scoreboard';
 import { setSongScore } from '../../../utils/Firebase/Score/score.firebase';
+import { addRecentSong } from '../../../utils/Firebase/RecentSongs/recentSongs.firebase';
 
 export const LyricPlayer = () => {
     const location = useLocation();
@@ -47,6 +48,7 @@ export const LyricPlayer = () => {
     const handleAudioEnd = async () => {
         const randomScore = Math.floor(Math.random() * 100);
         await setSongScore(randomScore);
+        await addRecentSong(song);
         setScore(randomScore);
         audioRef.current.controls = false;
     }
