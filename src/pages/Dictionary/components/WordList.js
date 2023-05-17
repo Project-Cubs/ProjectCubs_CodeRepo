@@ -4,7 +4,7 @@ const WordList = ({ words, onStartQuiz }) => {
 
   return (
     <header>
-      <h1>Bookmark</h1>
+      <h1 className="wordList">Bookmark</h1>
       <section className="word-list">
         {words.map((word, index) => {
 

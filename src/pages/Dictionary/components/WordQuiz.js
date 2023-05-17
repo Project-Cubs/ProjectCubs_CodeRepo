@@ -6,7 +6,7 @@ function WordQuiz({ words }) {
 
     const [numCorrect, setNumCorrect] = useState(0);
     const [currentWordIndex, setCurrentWordIndex] = useState(0);
-    const [options, setOptions] = useState([])
+    const [options, setOptions] = useState([]);
 
     useEffect(
         () => {
