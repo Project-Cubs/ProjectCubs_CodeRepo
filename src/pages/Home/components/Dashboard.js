@@ -18,6 +18,7 @@ const Dashboard = () => {
         auth.onAuthStateChanged(async (user) => {
             if (user) {
                 const dbUser = await getUser();
+                console.log(dbUser);
                 const bookmark = dbUser.bookmark || [];
                 setRecentWords(bookmark.length > 3 ? bookmark.slice(-3) : bookmark);
                 setRecentSongs(dbUser.recentSongs || []);

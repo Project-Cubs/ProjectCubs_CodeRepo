@@ -2,21 +2,15 @@
 
 import React from 'react';
 import { parseStringPromise } from 'xml2js';
+import { searchDictionary } from '../../../../utils/Dictionary/searchDictionary';
 
-export const Lyrics = ({ lyrics, currentLineIndex }) => {
+export const Lyrics = ({ lyrics, currentLineIndex, setPopupInfo }) => {
 
     const getKoreanDefinition = async (event, word) => {
         event.stopPropagation();
-        const url = process.env.REACT_APP_DICT_URL;
-        const key = process.env.REACT_APP_DICT_KEY;
-        const q = word;
-        const translated = "y";
-        const trans_lang = "1";
-        const response = await fetch(`${url}?key=${key}&q=${q}&translated=${translated}&trans_lang=${trans_lang}`);
-        const text = await response.text();
-        const json = await parseStringPromise(text);
-        const definition = json.channel.item?.[0].sense?.[0].translation?.[0].trans_dfn;
-        definition ? alert(`Definition: ${definition}`) : alert("No definition found");
+        console.log("word", word)
+        const info = await searchDictionary(word);
+        info.englishWord && setPopupInfo(info);
     };
 
     const extractKoreanWords = (sentence) => sentence.match(/[\uAC00-\uD7AF]+/g);
