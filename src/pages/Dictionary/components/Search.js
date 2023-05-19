@@ -19,7 +19,6 @@ const Search = ({ onSearchWord }) => {
         }
     }
 
-
     return (
         <header>
             <blockquote>
@@ -41,7 +40,7 @@ const Search = ({ onSearchWord }) => {
                         }}
                         defaultValue={word}
                     />
-                    <button onClick={async (e) => await handleClick(e)} type="submit">
+                    <button onClick={async (e) => await handleClick(e)} type="submit" className="Search">
                         Search
                     </button>
                 </form>

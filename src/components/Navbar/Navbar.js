@@ -4,7 +4,7 @@ import "./Navbar.css"
 export const Navbar = function () {
   const navigate = useNavigate()
   return (
-    <div>
+    <div className="navBar">
       <nav>
         <NavLink to={"/"} className={"Links"}>
           <h1>My K Star</h1>

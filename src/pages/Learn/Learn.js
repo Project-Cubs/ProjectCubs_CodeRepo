@@ -3,7 +3,7 @@ import { SongCard } from "../../components/Cards/Cards";
 import { Navbar } from "../../components/Navbar/Navbar";
 import { downloadSongs } from "../../utils/Firebase/Songs/songs.firebase";
 
-export function Learn () {
+export function Learn() {
 
     const [songs, setSongs] = useState([]);
 
@@ -14,7 +14,7 @@ export function Learn () {
     return (
         <div>
             <Navbar></Navbar>
-            <main>
+            <main className="loggedIn">
                 <h1> Learn </h1>
                 <section>
                     {songs.map((song, i) => {
