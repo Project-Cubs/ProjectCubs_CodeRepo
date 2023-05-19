@@ -5,18 +5,7 @@ import { Link } from "react-router-dom";
 import { RecentWordCard } from "../../../Cards/Cards";
 import "../../dashboard.css";
 
-export default function RecentWords() {
-  const [recentWords, setRecentWords] = useState([]);
-
-  useEffect(() => {
-    auth.onAuthStateChanged(async (user) => {
-      if (user) {
-        const dbUser = await getUser();
-        const bookmark = dbUser.bookmark || [];
-        setRecentWords(bookmark.length > 3 ? bookmark.slice(-3) : bookmark);
-      }
-    })
-  }, [])
+export default function RecentWords({recentWords}) {
 
   return (
     <div className="recent-words">

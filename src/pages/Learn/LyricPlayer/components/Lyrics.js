@@ -10,7 +10,11 @@ export const Lyrics = ({ lyrics, currentLineIndex, setPopupInfo }) => {
         event.stopPropagation();
         console.log("word", word)
         const info = await searchDictionary(word);
-        info.englishWord && setPopupInfo(info);
+        if (!info) {
+            alert("No definition found");
+        } else {
+            info.englishWord && setPopupInfo(info);
+        }
     };
 
     const extractKoreanWords = (sentence) => sentence.match(/[\uAC00-\uD7AF]+/g);

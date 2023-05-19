@@ -8,14 +8,19 @@ import "./dashboard.css";
 
 export default function Dashboard() {
 
-  const [firstName, setFirstName] = useState("John");
+  const [firstName, setFirstName] = useState("");
+  const [recentWords, setRecentWords] = useState([])
+  const [recentSongs, setRecentSongs] = useState([])
 
   useEffect(() => {
     auth.onAuthStateChanged(async (user) => {
       if (user) {
         const dbUser = await getUser();
-        const firstname = dbUser.firstName || "John";
-        setFirstName(firstname);
+        console.log(dbUser);
+        const bookmark = dbUser.bookmark || [];
+        setRecentWords(bookmark.length > 3 ? bookmark.slice(-3) : bookmark);
+        setRecentSongs(dbUser.recentSongs || []);
+        setFirstName(dbUser.firstName);
       }
     })
   }, [])
@@ -26,8 +31,8 @@ export default function Dashboard() {
       <h1 className="h1">{firstName}</h1>
       <section className="content-section">
         <ChartCard />
-        <RecentSongs />
-        <RecentWords />
+        <RecentSongs recentSongs={recentSongs} />
+        <RecentWords recentWords={recentWords} />
       </section>
     </div>
   )
