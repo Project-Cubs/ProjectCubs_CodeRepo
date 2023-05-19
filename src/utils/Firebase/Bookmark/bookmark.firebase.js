@@ -19,6 +19,5 @@ export async function getBookmark() {
     // Get user's bookmark
     const user = await getUser();
     // ADD CODE HERE
-    console.log(user);
     return user.bookmark;
 }
