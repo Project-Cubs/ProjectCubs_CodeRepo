@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import ChartCard from "./Components/ChartCard/ChartCard";
-import RecentSongs from "./Components/RecentSongs/RecentSongs";
-import RecentWords from "./Components/RecentWords/RecentWords"
-import { getUser } from "../../utils/Firebase/Users/users.firebase";
-import { auth } from "../../utils/Firebase/Firebase";
+import ChartCard from "./components/ChartCard/ChartCard";
+import RecentSongs from "./components/RecentSongs/RecentSongs";
+import RecentWords from "./components/RecentWords/RecentWords"
+import { getUser } from "../../../../utils/Firebase/Users/users.firebase";
+import { auth } from "../../../../utils/Firebase/Firebase";
 import "./dashboard.css";
 
 export default function Dashboard() {

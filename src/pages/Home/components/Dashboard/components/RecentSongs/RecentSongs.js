@@ -1,4 +1,4 @@
-import { RecentSongCard } from "../../../Cards/Cards";
+import { RecentSongCard } from "../../../../../../components/Cards/Cards";
 import { Link } from "react-router-dom";
 import "../../dashboard.css";
 

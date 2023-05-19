@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { auth } from "../../../../utils/Firebase/Firebase";
-import { getUser } from "../../../../utils/Firebase/Users/users.firebase";
+import { auth } from "../../../../../../utils/Firebase/Firebase";
+import { getUser } from "../../../../../../utils/Firebase/Users/users.firebase";
 import { Link } from "react-router-dom";
-import { RecentWordCard } from "../../../Cards/Cards";
+import { RecentWordCard } from "../../../../../../components/Cards/Cards";
 import "../../dashboard.css";
 
 export default function RecentWords({recentWords}) {
