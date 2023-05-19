@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import "./LyricPlayer.css";
 import { BackButton } from '../../../components/Buttons/BackButton';
 import { Lyrics } from './components/Lyrics';

@@ -48,3 +48,13 @@
     cursor: pointer;
     display: block;
 }
+
+.directNavButton {
+    width: 20%;
+    margin: 0 40%;
+}
+
+.Search {
+    width: auto;
+    margin: 0;
+}
