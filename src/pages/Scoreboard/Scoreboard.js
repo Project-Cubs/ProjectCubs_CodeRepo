@@ -1,30 +1,25 @@
-
-import { useEffect, useState } from "react";
-import { Navbar } from "../../components/Navbar/Navbar";
 import { onValue, ref } from "firebase/database";
+import { useEffect, useState } from "react";
 import { database } from "../../utils/Firebase/Firebase";
-
+import { Navbar } from "../../components/Navbar/Navbar"
 
 export function Scoreboard() {
 
   const [scores, setScores] = useState([]);
 
   function getHighestScore(user) {
-    const songScore = user.highScore.song;
-    const quizScore = user.highScore.quiz;
-
+    const songScore = user.highScore.song || 0;
+    const quizScore = user.highScore.quiz || 0;
     if (songScore > quizScore) {
-      // do something when songScore > quizScore
       return {
         name: `${user.firstName} ${user.lastName}`,
-        type: "song",
+        type: "Song",
         score: songScore
       }
     } else {
-      // do something when quizScore > songScore
       return {
         name: `${user.firstName} ${user.lastName}`,
-        type: "quiz",
+        type: "Quiz",
         score: quizScore
       }
     }
@@ -32,9 +27,8 @@ export function Scoreboard() {
 
   useEffect(() => {
     onValue(ref(database, "/users"), (snapshot) => {
-      const users = Object.values(snapshot.val());
+      const users = Object.values(snapshot.val())
       if (users) {
-        // ADD ROWS
         const highestScores = users
           .map(user => getHighestScore(user))
           .sort((a, b) => b.score - a.score)
@@ -47,25 +41,25 @@ export function Scoreboard() {
   return (
     <div>
       <Navbar />
-      <main>
+      <main className="loggedIn">
         <h1> Scoreboard </h1>
-        <table>
-          <thead>
-            <tr>
-              <th> Ranking </th>
-              <th> Name </th>
-              <th> Type </th>
-              <th> Score </th>
+        <table className="table">
+          <thead className="tableHead">
+            <tr key={"head"} className="tableHeadRow">
+              <th className="tableHeadIndex"></th>
+              <th className="tableHeadName"><span className="tabHead" />Name</th>
+              <th className="tableHeadItem">Type</th>
+              <th className="tableHeadItem">Score</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="tableBody">
             {scores.map((score, index) => {
               return (
-                <tr key={index}>
-                  <td> {index + 1} </td>
-                  <td> {score.name} </td>
-                  <td> {score.type} </td>
-                  <td> {score.score} </td>
+                <tr key={index} className="tableBodyRow">
+                  <td className="tableBodyIndex"></td>
+                  <td className="tableBodyName"><b>{index + 1}</b><span className="tabBody" />{score.name}</td>
+                  <td className="tableBodyItem">{score.type}</td>
+                  <td className="tableBodyItem">{score.score}</td>
                 </tr>
               )
             })}
