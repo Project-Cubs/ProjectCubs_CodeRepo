@@ -2,4 +2,5 @@
 
 ## Authors
 - Brian Lee (brian@logncoding.com)
+- Joshua Lee (mrcatmilk1@gmail.com
 - 
