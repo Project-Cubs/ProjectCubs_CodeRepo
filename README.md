@@ -5,3 +5,4 @@
 - Joshua Lee (mrcatmilk1@gmail.com
 - MinJun Oh (ttugbaegi0521@gmail.com)
 - Qtac Kim (qtek11042@gmail.com)
+- Jay Won Kim (jaylego101@gmail.com)
